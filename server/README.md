@@ -81,7 +81,7 @@
     * 내 생각 : 스프링 부트를 실행 메세지에서 확인 가능한 내장 톰캣, 스레드 풀이 아마 자동(기본 정책이 있을것 같다)으로 처리하고 있는 것 같다
     
  ## 5. 적용을 시도 해볼만한 기술
-  - h2+spring data jpa 대신에 redis+spring data redis
+  - h2+spring data jpa 대신에 redis(sub, cache)+spring data redis+ehcache + mysql(main)
   - spring security 필터체인 대신 interceptor
   - 도커 컴포즈(실무에서는 쿠버네티스를 이용한다고 한다.)를 이용, 서비스 분리, BranchByAbstraction 개념 적용해보기
   - 다중 접속 상황을 가정하여 Contents Aggregator의 비즈니스 로직에 비동기, 논블로킹 개념 적용
