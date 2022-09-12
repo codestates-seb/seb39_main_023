@@ -1,0 +1,9 @@
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+
+  jackson:
+    property-naming-strategy: UPPER_CAMEL_CASE
+    # ???? <> json ?? ?? ??
