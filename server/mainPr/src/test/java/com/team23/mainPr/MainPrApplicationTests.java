@@ -14,7 +14,7 @@ class MainPrApplicationTests {
 	@Autowired
 	MemberController memberController;
 
-	CreateMemberDto createMemberDto = new CreateMemberDto("ska40806","jangwonyong@@@");
+	CreateMemberDto createMemberDto = new CreateMemberDto("wonyong92","jangwonyong@@@","oreooreo");
 
 
 
@@ -39,7 +39,10 @@ class MainPrApplicationTests {
 		Member created = (Member)result.getBody();//명시적으로 캐스팅해주어야 한다.
 
 		System.out.println(created.getLoginId());
-		Assert.isTrue(created.getLoginId().equals("ska40806"),"user ID, password check function test");
+		Assert.isTrue(created.getLoginId().equals("ska40806"),"user ID check");
+		Assert.isTrue(created.getPassword().equals("jangwonyong@@@"),"password check");
+		Assert.isTrue(created.getNickNam().equals("oreooreo"),"Nickname check");
+
 
 	}
 	@Test

@@ -3,6 +3,8 @@ package com.team23.mainPr.Member.Service;
 import com.team23.mainPr.Member.Dto.CreateMemberDto;
 import com.team23.mainPr.Member.Entity.Member;
 import com.team23.mainPr.Member.Repository.MemberRepository;
+import com.team23.mainPr.Profile.Entity.Profile;
+import com.team23.mainPr.Profile.Repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +14,16 @@ import java.util.regex.Pattern;
 public class MemberService {
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    ProfileRepository profileRepository;
     //refactor : spring validation 적용시 서비스 삭제 가능 할듯
     public boolean loginValidation(CreateMemberDto dto) {
         try {
             String idPattern = "^[a-zA-Z][\\w]{4,10}$";
             String passworedPattern = "^[@!#%&]{0,}[\\w]{0,10}[@!#%&]{1,}[\\w]{0,10}[@!#%&]{0,}$";
-            if (Pattern.matches(idPattern, dto.getLoginId()) && Pattern.matches(passworedPattern, dto.getPassword()) && dto.getPassword().length()<=20&& dto.getPassword().length()>=6)
+            String nickPattern = "^[\\w]{5,30}$";
+            if (Pattern.matches(idPattern, dto.getLoginId()) && Pattern.matches(passworedPattern, dto.getPassword()) && dto.getPassword().length()<=20&& dto.getPassword().length()>=6
+            &&Pattern.matches(nickPattern,dto.getNickname()))
                 return true;
             return false;
         }
@@ -41,6 +47,12 @@ public class MemberService {
 
             memberRepository.save(member);
             Member result = memberRepository.findById(member.getId()).orElseThrow();
+
+            Profile profile = new Profile();
+            profile.setNickname(member.getNickNam());
+            profileRepository.save(profile);
+            Profile Presult = profileRepository.findById(profile.getId()).orElseThrow();
+
             return result;
 
         }catch(Exception e)

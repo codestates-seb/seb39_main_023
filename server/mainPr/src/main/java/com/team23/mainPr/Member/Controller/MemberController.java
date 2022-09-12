@@ -45,6 +45,7 @@ public class MemberController {
         boolean result = memberService.loginValidation(dto);
         return result;
     }//validation
+    //refactor : 비밀번호 같은 민감 정보를 전송해도 될까? - response Dto를 만들어서 암호화 할까?
     @ApiOperation(
             value = "회원 가입"
             , notes = "데이터베이스에 회원 정보를 저장하고, 생성된 회원정보를 응답한다.")
