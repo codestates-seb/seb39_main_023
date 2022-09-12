@@ -16,8 +16,8 @@ public class MemberService {
     public boolean loginValidation(CreateMemberDto dto) {
         try {
             String idPattern = "^[a-zA-Z][\\w]{4,10}$";
-            String passworedPattern = "^[\\w]{0,20}[@!#%&]{1,}[\\w]{0,5}$";
-            if (Pattern.matches(idPattern, dto.getLoginId()) && Pattern.matches(passworedPattern, dto.getPassword()))
+            String passworedPattern = "^[@!#%&]{0,}[\\w]{0,10}[@!#%&]{1,}[\\w]{0,10}[@!#%&]{0,}$";
+            if (Pattern.matches(idPattern, dto.getLoginId()) && Pattern.matches(passworedPattern, dto.getPassword()) && dto.getPassword().length()<=20&& dto.getPassword().length()>=6)
                 return true;
             return false;
         }
@@ -28,6 +28,9 @@ public class MemberService {
     }
     // refactor : 트랜젝션 적용 
     // refactor : 생성 후 확인 과정에서 어떤 필드 하나라도 null 이면 실패 및 롤백 필요
+    // refactor : 캐시, 샤딩 적용하면 저장하는 방법이 복잡해질듯 - 캐싱 전략은 추후에 공부하여 적용
+    // study : rdbms 쓸때 처럼 auto increment 적용 안되나?
+    //
     public Member createMember(CreateMemberDto dto) {
         try{
             String LoginId = dto.getLoginId();
