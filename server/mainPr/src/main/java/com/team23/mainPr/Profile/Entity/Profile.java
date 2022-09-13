@@ -22,6 +22,7 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer Id;
+
     String Nickname;
 
 
