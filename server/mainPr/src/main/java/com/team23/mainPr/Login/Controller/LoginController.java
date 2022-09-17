@@ -23,10 +23,8 @@ public class LoginController {
 
         ChildCommonDto response = loginService.doLogin(dto);
 
-        if (!response.getMsg().contains("not matched") && !response.getMsg().equals("Error"))
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        else
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, response.getHttpStatus());
+
     }
 
     @PostMapping("/logout")
@@ -34,9 +32,13 @@ public class LoginController {
 
         ChildCommonDto response = loginService.doLogout(Authorization);
 
-        if (!response.getMsg().contains("not matched") && !response.getMsg().equals("Error"))
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        else
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+    @PostMapping("/refeshToken")
+    public ResponseEntity<ChildCommonDto> refeshToken(@RequestParam String Authorization) {
+
+        ChildCommonDto response = loginService.refreshToken(Authorization);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 }

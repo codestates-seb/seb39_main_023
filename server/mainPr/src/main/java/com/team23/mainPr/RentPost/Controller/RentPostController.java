@@ -34,12 +34,7 @@ public class RentPostController {
     public ResponseEntity<ChildCommonDto> createRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 렌트 게시글 데이터.", required = true) CreateRentPostDto dto) {
         ChildCommonDto response = RentPostService.createRentPost(dto);
 
-        if (response.getMsg().equals("true"))
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        else if (response.getMsg().equals("false"))
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     /**<pre>

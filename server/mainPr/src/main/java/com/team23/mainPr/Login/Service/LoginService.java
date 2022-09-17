@@ -26,6 +26,7 @@ public class LoginService {
     private final LoginRepository loginRepository;
     private final LoginMapper loginMapper;
     private final DefaultTimeZone defaultTimeZone;
+    private final JwtBuilder jwtBuilder;
 
     public ChildCommonDto doLogin(CreateLoginDto dto) {
 
@@ -36,7 +37,8 @@ public class LoginService {
                 if (member.getPassword().equals(dto.getPassword())) {
 
                     String token = jwtService.buildJwt(member);
-                    if( loginRepository.findByMemberId(member.getMemberId()) == null)
+                    Login existLogin =  loginRepository.findByMemberId(member.getMemberId());
+                    if(existLogin == null)
                     {
                         Login login = new Login();
                         login.setLastLoginDt(defaultTimeZone.getNow());
@@ -47,8 +49,14 @@ public class LoginService {
                         loginRepository.save(login);
                         return new ChildCommonDto(token, HttpStatus.OK, loginMapper.doLoginMap(login));
                     }
-
-                    return new ChildCommonDto(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);
+                    else
+                    {
+                        existLogin.setLogouted(false);
+                        existLogin.setToken(token);
+                        existLogin.setLogoutDt(null);
+                        loginRepository.flush();
+                        return new ChildCommonDto(token, HttpStatus.OK, loginMapper.doLoginMap(existLogin));
+                    }
                 }
 
                 return new ChildCommonDto(NOT_MATCH_PASSWORD.getMsg(), HttpStatus.BAD_REQUEST, null);
@@ -84,5 +92,28 @@ public class LoginService {
             return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
 
+    }
+
+    public ChildCommonDto refreshToken(String token) {
+
+        try {
+        Login login = loginRepository.findByToken(token);
+
+        if (login != null) {
+                if (login.getLogouted()) {
+                    String newToken = jwtBuilder.buildJwt(memberRepository.findById(login.getMemberId()).orElseThrow());
+                    login.setToken(newToken);
+                    loginRepository.flush();
+                    return new ChildCommonDto(newToken, HttpStatus.OK, loginMapper.doLoginMap(login));
+                }
+
+                return new ChildCommonDto(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);
+            }
+
+            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e) {
+
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 }

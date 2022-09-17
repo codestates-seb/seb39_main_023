@@ -74,6 +74,10 @@ public class MemberService {
     public ChildCommonDto createMember(CreateMemberDto dto) throws NullPointerException {
 
 //        try {
+            if(memberRepository.findByLoginId(dto.getLoginId())!=null)
+            {
+                return new ChildCommonDto(FAIL.getMsg(), HttpStatus.OK, null);
+            }
             Member member = new Member();
             member.setLoginId(dto.getLoginId());
             member.setPassword(dto.getPassword());
