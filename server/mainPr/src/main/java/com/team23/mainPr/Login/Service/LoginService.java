@@ -1,5 +1,6 @@
 package com.team23.mainPr.Login.Service;
 
+import com.team23.mainPr.DefaultTimeZone;
 import com.team23.mainPr.Dto.ChildCommonDto;
 import com.team23.mainPr.Jwt.Service.JwtBuilder;
 import com.team23.mainPr.Login.Dto.CreateLoginDto;
@@ -24,30 +25,64 @@ public class LoginService {
     private final MemberMapper memberMapper;
     private final LoginRepository loginRepository;
     private final LoginMapper loginMapper;
+    private final DefaultTimeZone defaultTimeZone;
+
     public ChildCommonDto doLogin(CreateLoginDto dto) {
 
-        try {
+//        try {
             Member member = memberRepository.findByLoginId(dto.getLoginId());
 
             if (member != null) {
                 if (member.getPassword().equals(dto.getPassword())) {
 
                     String token = jwtService.buildJwt(member);
-                    dto.setToken(token);
-                    dto.setMemberId(member.getMemberId());
-                    Login login  = loginMapper.createMap(dto);
-                    loginRepository.save(login);
-                    return new ChildCommonDto(token, HttpStatus.OK, memberMapper.MemberToMemberResponse(member));
+                    if( loginRepository.findByMemberId(member.getMemberId()) == null)
+                    {
+                        Login login = new Login();
+                        login.setLastLoginDt(defaultTimeZone.getNow());
+                        login.setToken(token);
+                        login.setLogouted(false);
+                        login.setMemberId(member.getMemberId());
+                        login.setLogoutDt(null);
+                        loginRepository.save(login);
+                        return new ChildCommonDto(token, HttpStatus.OK, loginMapper.doLoginMap(login));
+                    }
+
+                    return new ChildCommonDto(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);
                 }
 
-                return new ChildCommonDto(NOT_MATCH_ID.getMsg(), HttpStatus.BAD_REQUEST, null);
+                return new ChildCommonDto(NOT_MATCH_PASSWORD.getMsg(), HttpStatus.BAD_REQUEST, null);
             }
 
-            return new ChildCommonDto(NOT_MATCH_PASSWORD.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto(NOT_MATCH_ID.getMsg(), HttpStatus.BAD_REQUEST, null);
+
+//        } catch (Exception e) {
+//
+//            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+//        }
+    }
+
+    public ChildCommonDto doLogout(String authorization) {
+        try {
+            Login login = loginRepository.findByToken(authorization);
+
+            if (login != null) {
+                if (!login.getLogouted()) {
+                    login.setLogouted(Boolean.TRUE);
+                    login.setLogoutDt(defaultTimeZone.getNow());
+                    loginRepository.flush();
+                    return new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, null);
+                }
+
+                return new ChildCommonDto(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);
+            }
+
+            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
         } catch (Exception e) {
 
             return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
+
     }
 }

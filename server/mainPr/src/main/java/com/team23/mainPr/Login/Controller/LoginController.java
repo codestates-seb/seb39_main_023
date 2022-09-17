@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,6 +22,17 @@ public class LoginController {
     public ResponseEntity<ChildCommonDto> doLogin(@RequestBody CreateLoginDto dto) {
 
         ChildCommonDto response = loginService.doLogin(dto);
+
+        if (!response.getMsg().contains("not matched") && !response.getMsg().equals("Error"))
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ChildCommonDto> doLogout(@RequestParam String Authorization) {
+
+        ChildCommonDto response = loginService.doLogout(Authorization);
 
         if (!response.getMsg().contains("not matched") && !response.getMsg().equals("Error"))
             return new ResponseEntity<>(response, HttpStatus.OK);

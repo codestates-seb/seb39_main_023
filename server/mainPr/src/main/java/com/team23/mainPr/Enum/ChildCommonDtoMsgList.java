@@ -20,7 +20,6 @@ public enum ChildCommonDtoMsgList {
     NOT_MATCH_ID("not matched loginId"),
     ERROR("Error");
 
-
     private final String msg;
 
     // public 시 컴파일 에러 발생
