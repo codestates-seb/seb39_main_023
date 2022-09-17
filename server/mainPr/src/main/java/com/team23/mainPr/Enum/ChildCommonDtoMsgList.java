@@ -2,7 +2,8 @@ package com.team23.mainPr.Enum;
 
 import lombok.Getter;
 
-/**<pre>
+/**
+ * <pre>
  * 자바 enum으로 ChildCommonDto의 가능한 메세지 목록을 작성
  * @see ChildCommonDtoMsgList#getMsg() 함수로 저장된 메세지 출력
  * name() 함수는 final 함수라 오버라이드 불가능

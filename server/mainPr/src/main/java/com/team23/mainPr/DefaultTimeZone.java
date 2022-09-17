@@ -5,17 +5,18 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+
 @Component
-public class DefaultTimeZone  {
+public class DefaultTimeZone {
 
     @Value("${timeZone.location.asia_seoul}")
     String location;
 
-    public DefaultTimeZone(){
+    public DefaultTimeZone() {
 
     }
 
-    public ZonedDateTime getNow(){
+    public ZonedDateTime getNow() {
         return ZonedDateTime.now(ZoneId.of(this.location));
     }
 

@@ -19,10 +19,11 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    /**<pre>
+    /**
+     * <pre>
      * .paths(regex("/(user|profile|RentPost)/.*")) : 스웨거에 여러 path 추가하기
      * </pre>
-     * */
+     */
 
     @Bean
     public Docket restAPI() {
@@ -36,10 +37,11 @@ public class SwaggerConfig {
                 .build();
     }
 
-    /**<pre>
+    /**
+     * <pre>
      * 3자리 version의 의미 : 배포.개발.패치
      * </pre>
-     * */
+     */
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

@@ -4,10 +4,12 @@ import lombok.Getter;
 
 import java.time.ZoneId;
 
-/**<pre>
+/**
+ * <pre>
  * 자바 enum으로 사용가능한 TIME ZONE 을 제한
  * name() 함수는 final 함수라 오버라이드 불가능
  * </pre>
+ *
  * @see TimeZone#getZoneId() 함수로 저장된 메세지 출력
  */
 

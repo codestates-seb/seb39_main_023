@@ -1,7 +1,6 @@
 package com.team23.mainPr.Login.Dto;
 
 import lombok.Data;
-
 import java.time.ZonedDateTime;
 
 @Data
@@ -13,5 +12,5 @@ public class CreateLoginDto {
     private String token;
     private ZonedDateTime lastLoginDt;
     private ZonedDateTime logoutDt = null;
-    private Boolean logouted=false;
+    private Boolean logouted = false;
 }

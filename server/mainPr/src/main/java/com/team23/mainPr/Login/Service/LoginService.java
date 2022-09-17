@@ -30,16 +30,15 @@ public class LoginService {
 
     public ChildCommonDto doLogin(CreateLoginDto dto) {
 
-//        try {
+        try {
             Member member = memberRepository.findByLoginId(dto.getLoginId());
 
             if (member != null) {
                 if (member.getPassword().equals(dto.getPassword())) {
 
                     String token = jwtService.buildJwt(member);
-                    Login existLogin =  loginRepository.findByMemberId(member.getMemberId());
-                    if(existLogin == null)
-                    {
+                    Login existLogin = loginRepository.findByMemberId(member.getMemberId());
+                    if (existLogin == null) {
                         Login login = new Login();
                         login.setLastLoginDt(defaultTimeZone.getNow());
                         login.setToken(token);
@@ -48,9 +47,7 @@ public class LoginService {
                         login.setLogoutDt(null);
                         loginRepository.save(login);
                         return new ChildCommonDto(token, HttpStatus.OK, loginMapper.doLoginMap(login));
-                    }
-                    else
-                    {
+                    } else {
                         existLogin.setLogouted(false);
                         existLogin.setToken(token);
                         existLogin.setLogoutDt(null);
@@ -64,10 +61,10 @@ public class LoginService {
 
             return new ChildCommonDto(NOT_MATCH_ID.getMsg(), HttpStatus.BAD_REQUEST, null);
 
-//        } catch (Exception e) {
-//
-//            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-//        }
+        } catch (Exception e) {
+
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     public ChildCommonDto doLogout(String authorization) {
@@ -97,9 +94,9 @@ public class LoginService {
     public ChildCommonDto refreshToken(String token) {
 
         try {
-        Login login = loginRepository.findByToken(token);
+            Login login = loginRepository.findByToken(token);
 
-        if (login != null) {
+            if (login != null) {
                 if (login.getLogouted()) {
                     String newToken = jwtBuilder.buildJwt(memberRepository.findById(login.getMemberId()).orElseThrow());
                     login.setToken(newToken);

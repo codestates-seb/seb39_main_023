@@ -8,7 +8,6 @@ import java.time.ZonedDateTime;
 @Data
 public class MemberResponseDto extends ParentCommonDto {
 
-
     private String loginId;
     private String password;
     private String nickname;

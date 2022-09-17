@@ -4,12 +4,10 @@ import com.team23.mainPr.Dto.ChildCommonDto;
 import com.team23.mainPr.Login.Dto.CreateLoginDto;
 import com.team23.mainPr.Login.Service.LoginService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -34,6 +32,7 @@ public class LoginController {
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
+
     @PostMapping("/refeshToken")
     public ResponseEntity<ChildCommonDto> refeshToken(@RequestParam String Authorization) {
 

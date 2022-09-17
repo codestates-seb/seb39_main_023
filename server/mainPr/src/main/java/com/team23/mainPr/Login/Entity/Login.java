@@ -11,6 +11,7 @@ import java.time.ZonedDateTime;
 @Entity
 @Data
 public class Login {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer loginId;
@@ -19,5 +20,5 @@ public class Login {
     ZonedDateTime lastLoginDt;
     ZonedDateTime logoutDt;
     Boolean logouted;
-    
+
 }

@@ -3,7 +3,8 @@ package com.team23.mainPr.CustomException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-/**<pre>
+/**
+ * <pre>
  * 예외 객체 자체가 아니라 예외의 정보를 감싸는 열거 객체
  * 실제 사용시에는 예외를 상속받은 예외 객체에 사용해야 한다.
  * 내부에 저장된 예외 정보가 수정(국제화 : 다른나라에서도 사용할 수 있게)이 어렵다.
@@ -13,7 +14,7 @@ import lombok.RequiredArgsConstructor;
  * 에러코드 자체는 거의 고정, 메세지에 대해서 다양한 언어로 표현 필요 - 어느정도 한정된 언어만 커버해야한다면 내부에 국가코드-메세지(자료구조 : 맵) 이런식으로 저장해서 사용하는 방식은 어떨까
  * enum 사용시 하나의 타입에 여러 이름의 객체 사용가능 - 비슷하게 인터페이스와 구현체들을 이용해보는 건? - 한눈에 관리하기 힘들다. 중복 코드가 많이 발생한다. 코드 구현이 간결하지 않다.
  * </pre>
- * */
+ */
 
 @RequiredArgsConstructor
 @Getter

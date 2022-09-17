@@ -11,7 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-/**<pre>
+/**
+ * <pre>
  * expected feature
  * create user data
  * create user profile by auto
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  * 현재 리턴문에 대해 같은 코드가 중복되고 있다 - 이후에 기능 구현이 상세해지면 분기가 달라질 가능성이 있어서 남겨두고
  * 만약 분기가 나누어 지지 않는다면 하나의 static 메소드로 만들어서 response에 들어갈 객체만 제네릭을 이용해서 처리 가능하게 만들기 -> 서비스에서 모두 처리하도록 리팩토링 완료
  * </pre>
- * */
+ */
 
 @Controller
 @RequestMapping("/member")
@@ -100,7 +101,7 @@ public class MemberController {
     public ResponseEntity<ChildCommonDto<MemberResponseDto>> updateProfile(@RequestBody UpdateMemberDto dto,
                                                                            @PathVariable Integer memberId) {
 
-        ChildCommonDto<MemberResponseDto> response = memberService.updateProfile(dto,memberId);
+        ChildCommonDto<MemberResponseDto> response = memberService.updateProfile(dto, memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }//createMember

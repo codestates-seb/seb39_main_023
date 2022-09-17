@@ -1,6 +1,5 @@
 package com.team23.mainPr.Login.Mapper;
 
-import com.team23.mainPr.Dto.ParentCommonDto;
 import com.team23.mainPr.Login.Dto.CreateLoginDto;
 import com.team23.mainPr.Login.Dto.DoLoginResponseDto;
 import com.team23.mainPr.Login.Entity.Login;
