@@ -6,6 +6,7 @@ import com.team23.mainPr.DefaultTimeZone;
 import com.team23.mainPr.Dto.ChildCommonDto;
 import com.team23.mainPr.Member.Dto.CreateMemberDto;
 import com.team23.mainPr.Member.Dto.MemberResponseDto;
+import com.team23.mainPr.Member.Dto.UpdateMemberDto;
 import com.team23.mainPr.Member.Entity.Member;
 import com.team23.mainPr.Member.Mapper.MemberMapper;
 import com.team23.mainPr.Member.Repository.MemberRepository;
@@ -145,6 +146,27 @@ public class MemberService {
 
             if (member != null)
                 return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberProfileDto(member));
+
+            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+
+        } catch (Exception e) {
+
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    public ChildCommonDto<MemberResponseDto> updateProfile(UpdateMemberDto dto,Integer memberId) {
+        try {
+            Member member = memberRepository.findById(memberId).orElse(null);
+
+            if (member != null) {
+                if(dto.getNickname()!=null)
+                    member.setNickname(dto.getNickname());
+                if(dto.getProfileImageId()!=null)
+                    member.setProfileImageId(dto.getNickname());
+                memberRepository.flush();
+                return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberProfileDto(member));
+            }
 
             return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 

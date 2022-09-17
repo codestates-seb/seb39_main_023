@@ -3,6 +3,7 @@ package com.team23.mainPr.Member.Controller;
 import com.team23.mainPr.Dto.ChildCommonDto;
 import com.team23.mainPr.Member.Dto.CreateMemberDto;
 import com.team23.mainPr.Member.Dto.MemberResponseDto;
+import com.team23.mainPr.Member.Dto.UpdateMemberDto;
 import com.team23.mainPr.Member.Service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -93,6 +94,16 @@ public class MemberController {
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }//deleteMember
+
+    @Operation
+    @PutMapping("profile/{memberId}")
+    public ResponseEntity<ChildCommonDto<MemberResponseDto>> updateProfile(@RequestBody UpdateMemberDto dto,
+                                                                           @PathVariable Integer memberId) {
+
+        ChildCommonDto<MemberResponseDto> response = memberService.updateProfile(dto,memberId);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }//createMember
 
 
 }
