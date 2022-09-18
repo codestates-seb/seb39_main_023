@@ -79,7 +79,7 @@ public class LoginService {
                     login.setLogouted(Boolean.TRUE);
                     login.setLogoutDt(defaultTimeZone.getNow());
                     loginRepository.flush();
-                    return new ChildCommonDto<>(SUC.getMsg(), HttpStatus.OK, null);
+                    return new ChildCommonDto<>(SUCSESS.getMsg(), HttpStatus.OK, null);
                 }
 
                 return new ChildCommonDto<>(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);

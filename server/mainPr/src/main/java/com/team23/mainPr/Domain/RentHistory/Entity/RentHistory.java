@@ -1,6 +1,8 @@
 package com.team23.mainPr.Domain.RentHistory.Entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,13 +11,15 @@ import javax.persistence.Id;
 import java.time.ZonedDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class RentHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer rentHistoryId;
     Integer targetMemberId;// ref member
-    boolean rentDataType = false;//send, receive 구별
+    Boolean rentDataType = false;//send, receive 구별
     String rentStatus = "not selected";//수락-미선택-거절 3case 표현 필요
     ZonedDateTime rentStartDate;
     ZonedDateTime rentEndDate;
@@ -26,7 +30,4 @@ public class RentHistory {
     ZonedDateTime updateTime;
     Integer relateRentHistory;
 
-    public boolean getRentDataType() {
-        return this.rentDataType;
-    }
 }

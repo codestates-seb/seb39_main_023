@@ -1,7 +1,7 @@
 package com.team23.mainPr.Domain.RentHistory.Mapper;
 
-import com.team23.mainPr.Domain.RentHistory.Dto.CreateRentHistoryDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDto;
+import com.team23.mainPr.Domain.RentHistory.Dto.Request.CreateRentHistoryEntityDto;
+import com.team23.mainPr.Domain.RentHistory.Dto.Response.RentHistoryResponseDto;
 import com.team23.mainPr.Domain.RentHistory.Entity.RentHistory;
 import org.mapstruct.Mapper;
 
@@ -11,8 +11,10 @@ import java.util.List;
 public interface RentHistoryMapper {
     List<RentHistoryResponseDto> map(List<RentHistory> rentHistoryList);
 
-    RentHistory CreateMap(CreateRentHistoryDto dto);
+    RentHistory CreateMap(CreateRentHistoryEntityDto dto);
 
     RentHistoryResponseDto responseMap(RentHistory created);
+
+    RentHistory RentHistoryToRelatedRentHistory(RentHistory created);
 
 }

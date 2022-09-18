@@ -1,11 +1,11 @@
-package com.team23.mainPr.Domain.RentHistory.Dto;
+package com.team23.mainPr.Domain.RentHistory.Dto.Request;
 
 import lombok.Data;
 
 import java.time.ZonedDateTime;
 
 @Data
-public class UpdateRentHistoryDto {
+public class UpdateRentHistoryEntityDto {
 
     Integer rentHistoryId;
     String rentStatus;

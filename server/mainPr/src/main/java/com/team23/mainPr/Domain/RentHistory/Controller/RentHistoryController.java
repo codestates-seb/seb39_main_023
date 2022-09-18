@@ -1,9 +1,9 @@
 package com.team23.mainPr.Domain.RentHistory.Controller;
 
-import com.team23.mainPr.Domain.RentHistory.Dto.CreateRentHistoryDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDtos;
-import com.team23.mainPr.Domain.RentHistory.Dto.UpdateRentHistoryDto;
+import com.team23.mainPr.Domain.RentHistory.Dto.Request.CreateRentHistoryEntityDto;
+import com.team23.mainPr.Domain.RentHistory.Dto.Request.UpdateRentHistoryEntityDto;
+import com.team23.mainPr.Domain.RentHistory.Dto.Response.RentHistoryResponseDto;
+import com.team23.mainPr.Domain.RentHistory.Dto.Response.RentHistoryResponseDtos;
 import com.team23.mainPr.Domain.RentHistory.Service.RentHistoryService;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,16 +39,16 @@ public class RentHistoryController {
 
     @Operation
     @PostMapping
-    public ResponseEntity<ChildCommonDto<RentHistoryResponseDto>> addRentHistoryData(@RequestBody CreateRentHistoryDto createRentHistoryDto) {
+    public ResponseEntity<ChildCommonDto<RentHistoryResponseDto>> addRentHistoryData(@RequestBody CreateRentHistoryEntityDto createRentHistoryEntityDto) {
 
-        ChildCommonDto<RentHistoryResponseDto> response = rentHistoryService.createRentHistory(createRentHistoryDto);
+        ChildCommonDto<RentHistoryResponseDto> response = rentHistoryService.createRentHistory(createRentHistoryEntityDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @Operation
     @PutMapping
-    public ResponseEntity<ChildCommonDto<RentHistoryResponseDto>> updateRentHistoryData(@RequestBody UpdateRentHistoryDto updateRentHistoryDto) {
+    public ResponseEntity<ChildCommonDto<RentHistoryResponseDto>> updateRentHistoryData(@RequestBody UpdateRentHistoryEntityDto updateRentHistoryDto) {
 
         ChildCommonDto<RentHistoryResponseDto> response = rentHistoryService.updateRentHistoryData(updateRentHistoryDto);
 
