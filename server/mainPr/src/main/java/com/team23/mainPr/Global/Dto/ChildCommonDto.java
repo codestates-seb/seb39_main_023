@@ -1,4 +1,4 @@
-package com.team23.mainPr.Global.Dto;
+package com.team23.mainPr.global.Dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

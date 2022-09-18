@@ -1,4 +1,4 @@
-package com.team23.mainPr.Config.WebConfig;
+package com.team23.mainPr.config.WebConfig;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

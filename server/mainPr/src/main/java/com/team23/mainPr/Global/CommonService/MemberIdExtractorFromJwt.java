@@ -1,4 +1,4 @@
-package com.team23.mainPr.Global.CommonService;
+package com.team23.mainPr.global.CommonService;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

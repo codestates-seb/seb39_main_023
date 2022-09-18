@@ -1,8 +1,8 @@
-package com.team23.mainPr.Domain.Logout.Controller;
+package com.team23.mainPr.domain.Logout.Controller;
 
-import com.team23.mainPr.Domain.Login.Service.LoginService;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
-import com.team23.mainPr.Global.Dto.ParentCommonDto;
+import com.team23.mainPr.domain.Login.Service.LoginService;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
+import com.team23.mainPr.global.Dto.ParentCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.team23.mainPr.Config.Swagger;
+package com.team23.mainPr.config.Swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

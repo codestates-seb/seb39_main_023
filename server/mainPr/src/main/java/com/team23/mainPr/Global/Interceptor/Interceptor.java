@@ -1,4 +1,4 @@
-package com.team23.mainPr.Global.Interceptor;
+package com.team23.mainPr.global.Interceptor;
 
 public class Interceptor {
 }

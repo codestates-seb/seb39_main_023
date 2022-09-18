@@ -1,8 +1,8 @@
-package com.team23.mainPr.Domain.RentPost.Mapper;
+package com.team23.mainPr.domain.RentPost.Mapper;
 
-import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
-import com.team23.mainPr.Domain.RentPost.Dto.RentPostResponseDto;
-import com.team23.mainPr.Domain.RentPost.Entity.RentPost;
+import com.team23.mainPr.domain.RentPost.Dto.CreateRentPostDto;
+import com.team23.mainPr.domain.RentPost.Dto.RentPostResponseDto;
+import com.team23.mainPr.domain.RentPost.Entity.RentPost;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

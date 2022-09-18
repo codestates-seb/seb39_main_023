@@ -1,7 +1,7 @@
-package com.team23.mainPr.Global.ExceptionHandler.ExceptionHandler;
+package com.team23.mainPr.global.ExceptionHandler.ExceptionHandler;
 
-import com.team23.mainPr.Global.CustomException.CustomException;
-import com.team23.mainPr.Global.CustomException.ErrorData;
+import com.team23.mainPr.global.CustomException.CustomException;
+import com.team23.mainPr.global.CustomException.ErrorData;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 

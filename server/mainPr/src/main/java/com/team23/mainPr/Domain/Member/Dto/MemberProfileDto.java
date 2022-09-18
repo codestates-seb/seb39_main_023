@@ -1,6 +1,6 @@
-package com.team23.mainPr.Domain.Member.Dto;
+package com.team23.mainPr.domain.Member.Dto;
 
-import com.team23.mainPr.Global.Dto.ParentCommonDto;
+import com.team23.mainPr.global.Dto.ParentCommonDto;
 import lombok.Data;
 import java.time.ZonedDateTime;
 

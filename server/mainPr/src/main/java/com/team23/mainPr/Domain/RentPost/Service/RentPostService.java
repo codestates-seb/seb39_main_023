@@ -1,17 +1,17 @@
-package com.team23.mainPr.Domain.RentPost.Service;
+package com.team23.mainPr.domain.RentPost.Service;
 
-import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
-import com.team23.mainPr.Domain.RentPost.Dto.RentPostResponseDto;
-import com.team23.mainPr.Domain.RentPost.Dto.UpdateRentPostDto;
-import com.team23.mainPr.Domain.RentPost.Entity.RentPost;
-import com.team23.mainPr.Domain.RentPost.Mapper.RentPostMapper;
-import com.team23.mainPr.Domain.RentPost.Repository.RentPostRepository;
-import com.team23.mainPr.Global.DefaultTimeZone;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
+import com.team23.mainPr.domain.RentPost.Dto.CreateRentPostDto;
+import com.team23.mainPr.domain.RentPost.Dto.RentPostResponseDto;
+import com.team23.mainPr.domain.RentPost.Dto.UpdateRentPostDto;
+import com.team23.mainPr.domain.RentPost.Entity.RentPost;
+import com.team23.mainPr.domain.RentPost.Mapper.RentPostMapper;
+import com.team23.mainPr.domain.RentPost.Repository.RentPostRepository;
+import com.team23.mainPr.global.DefaultTimeZone;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.*;
+import static com.team23.mainPr.global.Enum.ChildCommonDtoMsgList.*;
 
 /**
  * <pre>

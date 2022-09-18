@@ -1,8 +1,8 @@
-package com.team23.mainPr.Domain.Member.Controller;
+package com.team23.mainPr.domain.Member.Controller;
 
-import com.team23.mainPr.Domain.Member.Dto.*;
-import com.team23.mainPr.Domain.Member.Service.MemberService;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
+import com.team23.mainPr.domain.Member.Dto.*;
+import com.team23.mainPr.domain.Member.Service.MemberService;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

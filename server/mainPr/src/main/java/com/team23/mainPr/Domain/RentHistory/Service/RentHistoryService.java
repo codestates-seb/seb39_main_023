@@ -1,20 +1,20 @@
-package com.team23.mainPr.Domain.RentHistory.Service;
+package com.team23.mainPr.domain.RentHistory.Service;
 
-import com.team23.mainPr.Domain.RentHistory.Dto.CreateRentHistoryDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDtos;
-import com.team23.mainPr.Domain.RentHistory.Dto.UpdateRentHistoryDto;
-import com.team23.mainPr.Domain.RentHistory.Entity.RentHistory;
-import com.team23.mainPr.Domain.RentHistory.Mapper.RentHistoryMapper;
-import com.team23.mainPr.Domain.RentHistory.Repository.RentHistoryRepository;
-import com.team23.mainPr.Global.DefaultTimeZone;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
+import com.team23.mainPr.domain.RentHistory.Dto.CreateRentHistoryDto;
+import com.team23.mainPr.domain.RentHistory.Dto.RentHistoryResponseDto;
+import com.team23.mainPr.domain.RentHistory.Dto.RentHistoryResponseDtos;
+import com.team23.mainPr.domain.RentHistory.Dto.UpdateRentHistoryDto;
+import com.team23.mainPr.domain.RentHistory.Entity.RentHistory;
+import com.team23.mainPr.domain.RentHistory.Mapper.RentHistoryMapper;
+import com.team23.mainPr.domain.RentHistory.Repository.RentHistoryRepository;
+import com.team23.mainPr.global.DefaultTimeZone;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.*;
+import static com.team23.mainPr.global.Enum.ChildCommonDtoMsgList.*;
 
 /**
  * <pre>

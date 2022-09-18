@@ -1,11 +1,11 @@
-package com.team23.mainPr.Domain.RentHistory.Controller;
+package com.team23.mainPr.domain.RentHistory.Controller;
 
-import com.team23.mainPr.Domain.RentHistory.Dto.CreateRentHistoryDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDtos;
-import com.team23.mainPr.Domain.RentHistory.Dto.UpdateRentHistoryDto;
-import com.team23.mainPr.Domain.RentHistory.Service.RentHistoryService;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
+import com.team23.mainPr.domain.RentHistory.Dto.CreateRentHistoryDto;
+import com.team23.mainPr.domain.RentHistory.Dto.RentHistoryResponseDto;
+import com.team23.mainPr.domain.RentHistory.Dto.RentHistoryResponseDtos;
+import com.team23.mainPr.domain.RentHistory.Dto.UpdateRentHistoryDto;
+import com.team23.mainPr.domain.RentHistory.Service.RentHistoryService;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

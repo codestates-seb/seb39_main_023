@@ -1,6 +1,6 @@
-package com.team23.mainPr.Domain.Member.Repository;
+package com.team23.mainPr.domain.Member.Repository;
 
-import com.team23.mainPr.Domain.Member.Entity.Member;
+import com.team23.mainPr.domain.Member.Entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

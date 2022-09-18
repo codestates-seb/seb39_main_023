@@ -1,8 +1,8 @@
-package com.team23.mainPr.Domain.Member.Mapper;
+package com.team23.mainPr.domain.Member.Mapper;
 
-import com.team23.mainPr.Domain.Member.Dto.MemberProfileDto;
-import com.team23.mainPr.Domain.Member.Dto.MemberResponseDto;
-import com.team23.mainPr.Domain.Member.Entity.Member;
+import com.team23.mainPr.domain.Member.Dto.MemberProfileDto;
+import com.team23.mainPr.domain.Member.Dto.MemberResponseDto;
+import com.team23.mainPr.domain.Member.Entity.Member;
 import org.mapstruct.Mapper;
 
 /**

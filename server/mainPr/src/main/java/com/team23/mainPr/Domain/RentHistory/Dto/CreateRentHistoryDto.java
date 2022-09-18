@@ -1,4 +1,4 @@
-package com.team23.mainPr.Domain.RentHistory.Dto;
+package com.team23.mainPr.domain.RentHistory.Dto;
 
 import lombok.Data;
 

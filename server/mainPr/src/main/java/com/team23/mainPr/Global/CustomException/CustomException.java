@@ -1,4 +1,4 @@
-package com.team23.mainPr.Global.CustomException;
+package com.team23.mainPr.global.CustomException;
 
 import lombok.Getter;
 

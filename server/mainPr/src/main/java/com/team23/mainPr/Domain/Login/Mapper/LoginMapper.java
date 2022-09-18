@@ -1,8 +1,8 @@
-package com.team23.mainPr.Domain.Login.Mapper;
+package com.team23.mainPr.domain.Login.Mapper;
 
-import com.team23.mainPr.Domain.Login.Dto.CreateLoginDto;
-import com.team23.mainPr.Domain.Login.Dto.DoLoginResponseDto;
-import com.team23.mainPr.Domain.Login.Entity.Login;
+import com.team23.mainPr.domain.Login.Dto.CreateLoginDto;
+import com.team23.mainPr.domain.Login.Dto.DoLoginResponseDto;
+import com.team23.mainPr.domain.Login.Entity.Login;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

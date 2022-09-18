@@ -1,4 +1,4 @@
-package com.team23.mainPr.Global.Dummy;
+package com.team23.mainPr.global.Dummy;
 
 public class DummyGenerator {
 }

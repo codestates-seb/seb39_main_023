@@ -1,8 +1,8 @@
-package com.team23.mainPr.Global.Jwt.Service;
+package com.team23.mainPr.global.Jwt.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.team23.mainPr.Domain.Member.Entity.Member;
+import com.team23.mainPr.domain.Member.Entity.Member;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

@@ -1,16 +1,16 @@
 package com.team23.mainPr;
 
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
-import com.team23.mainPr.Domain.Member.Controller.MemberController;
-import com.team23.mainPr.Domain.Member.Dto.CreateMemberDto;
-import com.team23.mainPr.Domain.Member.Dto.MemberResponseDto;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
+import com.team23.mainPr.domain.Member.Controller.MemberController;
+import com.team23.mainPr.domain.Member.Dto.CreateMemberDto;
+import com.team23.mainPr.domain.Member.Dto.MemberResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
-import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.TRUE;
+import static com.team23.mainPr.global.Enum.ChildCommonDtoMsgList.TRUE;
 import static org.assertj.core.api.Assertions.*;
 
 /**<pre>

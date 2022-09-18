@@ -1,4 +1,4 @@
-package com.team23.mainPr.Global.Enum;
+package com.team23.mainPr.global.Enum;
 
 import lombok.Getter;
 

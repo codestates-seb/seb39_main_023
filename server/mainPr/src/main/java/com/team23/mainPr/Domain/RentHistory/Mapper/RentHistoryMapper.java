@@ -1,8 +1,8 @@
-package com.team23.mainPr.Domain.RentHistory.Mapper;
+package com.team23.mainPr.domain.RentHistory.Mapper;
 
-import com.team23.mainPr.Domain.RentHistory.Dto.CreateRentHistoryDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDto;
-import com.team23.mainPr.Domain.RentHistory.Entity.RentHistory;
+import com.team23.mainPr.domain.RentHistory.Dto.CreateRentHistoryDto;
+import com.team23.mainPr.domain.RentHistory.Dto.RentHistoryResponseDto;
+import com.team23.mainPr.domain.RentHistory.Entity.RentHistory;
 import org.mapstruct.Mapper;
 import java.util.List;
 

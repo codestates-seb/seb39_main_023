@@ -1,20 +1,20 @@
-package com.team23.mainPr.Domain.Login.Service;
+package com.team23.mainPr.domain.Login.Service;
 
-import com.team23.mainPr.Domain.Login.Dto.DoLoginDto;
-import com.team23.mainPr.Domain.Login.Dto.DoLoginResponseDto;
-import com.team23.mainPr.Domain.Login.Entity.Login;
-import com.team23.mainPr.Domain.Login.Mapper.LoginMapper;
-import com.team23.mainPr.Domain.Login.Repository.LoginRepository;
-import com.team23.mainPr.Domain.Member.Entity.Member;
-import com.team23.mainPr.Domain.Member.Repository.MemberRepository;
-import com.team23.mainPr.Global.DefaultTimeZone;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
-import com.team23.mainPr.Global.Dto.ParentCommonDto;
-import com.team23.mainPr.Global.Jwt.Service.JwtBuilder;
+import com.team23.mainPr.domain.Login.Dto.DoLoginDto;
+import com.team23.mainPr.domain.Login.Dto.DoLoginResponseDto;
+import com.team23.mainPr.domain.Login.Entity.Login;
+import com.team23.mainPr.domain.Login.Mapper.LoginMapper;
+import com.team23.mainPr.domain.Login.Repository.LoginRepository;
+import com.team23.mainPr.domain.Member.Entity.Member;
+import com.team23.mainPr.domain.Member.Repository.MemberRepository;
+import com.team23.mainPr.global.DefaultTimeZone;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
+import com.team23.mainPr.global.Dto.ParentCommonDto;
+import com.team23.mainPr.global.Jwt.Service.JwtBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.*;
+import static com.team23.mainPr.global.Enum.ChildCommonDtoMsgList.*;
 
 @Service
 @RequiredArgsConstructor

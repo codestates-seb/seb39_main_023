@@ -1,6 +1,6 @@
-package com.team23.mainPr.Domain.RentPost.Repository;
+package com.team23.mainPr.domain.RentPost.Repository;
 
-import com.team23.mainPr.Domain.RentPost.Entity.RentPost;
+import com.team23.mainPr.domain.RentPost.Entity.RentPost;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RentPostRepository extends JpaRepository<RentPost, Integer> {

@@ -1,18 +1,18 @@
-package com.team23.mainPr.Domain.Member.Service;
+package com.team23.mainPr.domain.Member.Service;
 
-import com.team23.mainPr.Domain.Member.Dto.*;
-import com.team23.mainPr.Domain.Member.Entity.Member;
-import com.team23.mainPr.Domain.Member.Mapper.MemberMapper;
-import com.team23.mainPr.Domain.Member.Repository.MemberRepository;
-import com.team23.mainPr.Global.CustomException.CustomException;
-import com.team23.mainPr.Global.CustomException.ErrorData;
-import com.team23.mainPr.Global.DefaultTimeZone;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
+import com.team23.mainPr.domain.Member.Dto.*;
+import com.team23.mainPr.domain.Member.Entity.Member;
+import com.team23.mainPr.domain.Member.Mapper.MemberMapper;
+import com.team23.mainPr.domain.Member.Repository.MemberRepository;
+import com.team23.mainPr.global.CustomException.CustomException;
+import com.team23.mainPr.global.CustomException.ErrorData;
+import com.team23.mainPr.global.DefaultTimeZone;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.regex.Pattern;
-import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.*;
+import static com.team23.mainPr.global.Enum.ChildCommonDtoMsgList.*;
 
 @Service
 @RequiredArgsConstructor

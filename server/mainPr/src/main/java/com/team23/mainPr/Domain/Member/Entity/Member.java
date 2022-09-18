@@ -1,4 +1,4 @@
-package com.team23.mainPr.Domain.Member.Entity;
+package com.team23.mainPr.domain.Member.Entity;
 
 import lombok.Data;
 import javax.persistence.Entity;

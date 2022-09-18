@@ -1,10 +1,10 @@
-package com.team23.mainPr.Domain.RentPost.Controller;
+package com.team23.mainPr.domain.RentPost.Controller;
 
-import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
-import com.team23.mainPr.Domain.RentPost.Dto.RentPostResponseDto;
-import com.team23.mainPr.Domain.RentPost.Dto.UpdateRentPostDto;
-import com.team23.mainPr.Domain.RentPost.Service.RentPostService;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
+import com.team23.mainPr.domain.RentPost.Dto.CreateRentPostDto;
+import com.team23.mainPr.domain.RentPost.Dto.RentPostResponseDto;
+import com.team23.mainPr.domain.RentPost.Dto.UpdateRentPostDto;
+import com.team23.mainPr.domain.RentPost.Service.RentPostService;
+import com.team23.mainPr.global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;

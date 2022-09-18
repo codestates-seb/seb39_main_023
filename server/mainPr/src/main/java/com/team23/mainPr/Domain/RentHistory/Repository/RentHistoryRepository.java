@@ -1,6 +1,6 @@
-package com.team23.mainPr.Domain.RentHistory.Repository;
+package com.team23.mainPr.domain.RentHistory.Repository;
 
-import com.team23.mainPr.Domain.RentHistory.Entity.RentHistory;
+import com.team23.mainPr.domain.RentHistory.Entity.RentHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

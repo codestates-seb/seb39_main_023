@@ -1,4 +1,4 @@
-package com.team23.mainPr.Domain.Member.Dto;
+package com.team23.mainPr.domain.Member.Dto;
 
 import lombok.Data;
 

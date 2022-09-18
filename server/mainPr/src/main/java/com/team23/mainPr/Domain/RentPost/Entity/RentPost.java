@@ -1,4 +1,4 @@
-package com.team23.mainPr.Domain.RentPost.Entity;
+package com.team23.mainPr.domain.RentPost.Entity;
 
 import lombok.Data;
 import javax.persistence.Entity;
