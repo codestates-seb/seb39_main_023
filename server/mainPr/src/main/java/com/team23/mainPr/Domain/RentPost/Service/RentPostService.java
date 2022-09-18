@@ -1,5 +1,6 @@
 package com.team23.mainPr.Domain.RentPost.Service;
 
+import com.team23.mainPr.Domain.RentPost.Dto.UpdateRentPostDto;
 import com.team23.mainPr.Global.DefaultTimeZone;
 import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
 import com.team23.mainPr.Domain.RentPost.Mapper.RentPostMapper;
@@ -49,12 +50,22 @@ public class RentPostService {
         }
     }
 
-    public ChildCommonDto updateRentPost(Integer postId, CreateRentPostDto dto) {
+    public ChildCommonDto updateRentPost(Integer postId, UpdateRentPostDto dto) {
 
         try {
+
             RentPost post = rentPostRepository.findById(postId).orElseThrow();
-            post.setRentPostContents(dto.getRentPostContents());
-            post.setRentPostName(dto.getRentPostName());
+
+            if(dto.getRentPostContents()!=null && dto.getRentPostName()!=null && dto.getRentStatus()==post.getRentStatus())
+                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(post));
+
+            if(dto.getRentPostContents()!=null)
+                post.setRentPostContents(dto.getRentPostContents());
+            if(dto.getRentPostName()!=null)
+                post.setRentPostName(dto.getRentPostName());
+            if(dto.getRentStatus()!=post.getRentStatus())
+                post.setRentStatus(dto.getRentStatus());
+
             post.setUpdateDate(defaultTimeZone.getNow());
             rentPostRepository.flush();
 

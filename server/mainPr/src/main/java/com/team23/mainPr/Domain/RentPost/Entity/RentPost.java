@@ -28,4 +28,5 @@ public class RentPost {
     private ZonedDateTime updateDate;
     private Integer writerId;
     private Integer viewCount = 0;
+    private Boolean rentStatus = false;
 }

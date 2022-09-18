@@ -15,7 +15,7 @@ public class RentHistory {
     Integer rentHistoryId;
     Integer targetMemberId;// ref member
     Boolean rentDataType = false;//send, receive 구별
-    String rentStatus = "not selected";
+    String rentStatus = "not selected";//수락-미선택-거절 3case 표현 필요
     ZonedDateTime rentStartDate;
     ZonedDateTime rentEndDate;
     Integer requesterId;//ref member

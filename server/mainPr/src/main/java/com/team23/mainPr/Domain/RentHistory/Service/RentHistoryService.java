@@ -87,12 +87,12 @@ public class RentHistoryService {
     public ChildCommonDto updateRentHistoryData(UpdateRentHistoryDto dto) {
         try {
 
-            if(dto.getRentHistoryId()==null &&dto.getRentStartDate()==null &&dto.getRentEndDate()==null &&dto.getMsg()==null)
+            RentHistory rentHistory = rentHistoryRepository.findById(dto.getRentHistoryId()).orElseThrow();
+
+            if(dto.getRentHistoryId()==null &&dto.getRentStartDate()==null &&dto.getRentEndDate()==null &&dto.getMsg()==null && dto.getRentStatus()==rentHistory.getRentStatus())
             {
                 return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
             }
-
-            RentHistory rentHistory = rentHistoryRepository.findById(dto.getRentHistoryId()).orElseThrow();
 
             if(dto.getRentHistoryId()!=null)
                 rentHistory.setRentStatus(dto.getRentStatus());
@@ -102,6 +102,9 @@ public class RentHistoryService {
                 rentHistory.setRentEndDate(dto.getRentEndDate());
             if(dto.getMsg()!=null)
                 rentHistory.setMsg(dto.getMsg());
+            if(dto.getRentStatus()==rentHistory.getRentStatus())
+                rentHistory.setRentStatus(dto.getRentStatus());
+
             rentHistory.setUpdateTime(defaultTimeZone.getNow());
 
             RentHistory created = rentHistoryRepository.save(rentHistory);

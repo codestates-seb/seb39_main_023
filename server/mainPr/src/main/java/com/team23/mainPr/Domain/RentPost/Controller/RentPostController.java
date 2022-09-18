@@ -1,5 +1,6 @@
 package com.team23.mainPr.Domain.RentPost.Controller;
 
+import com.team23.mainPr.Domain.RentPost.Dto.UpdateRentPostDto;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
 import com.team23.mainPr.Domain.RentPost.Service.RentPostService;
@@ -39,9 +40,9 @@ public class RentPostController {
 
     @Operation
     @PutMapping("/update")
-    public ResponseEntity<ChildCommonDto> updateRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 게시글 데이터.", required = true) CreateRentPostDto createRentPostDto,
+    public ResponseEntity<ChildCommonDto> updateRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 게시글 데이터.", required = true) UpdateRentPostDto updateRentPostDto,
                                                          @RequestParam @Parameter(name = "postId", description = "게시글 식별 번호.", required = true) Integer postId) {
-        ChildCommonDto response = RentPostService.updateRentPost(postId, createRentPostDto);
+        ChildCommonDto response = RentPostService.updateRentPost(postId, updateRentPostDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
