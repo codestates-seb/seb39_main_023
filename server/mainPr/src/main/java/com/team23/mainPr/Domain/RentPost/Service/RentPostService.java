@@ -98,11 +98,10 @@ public class RentPostService {
         try {
             RentPost result = rentPostRepository.findById(postId).orElseThrow();
 
-            if (result.getRentPostId().equals(postId)) {
-                return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
-            } else
-                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(result));
+            result.setViewCount(result.getViewCount()+1);
+            rentPostRepository.flush();
 
+            return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
         } catch (Exception e) {
 
             return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);

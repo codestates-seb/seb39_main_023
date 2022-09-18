@@ -28,18 +28,18 @@ public class RentHistoryController {
 
     @Operation
     @PostMapping
-    public ResponseEntity<ChildCommonDto> addRentHistoryData(@RequestBody CreateRentHistoryDto dto) {
+    public ResponseEntity<ChildCommonDto> addRentHistoryData(@RequestBody CreateRentHistoryDto createRentHistoryDto) {
 
-        ChildCommonDto response = rentHistoryService.addRentHistory(dto);
+        ChildCommonDto response = rentHistoryService.addRentHistory(createRentHistoryDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @Operation
     @PutMapping
-    public ResponseEntity<ChildCommonDto> updateRentHistoryData(@RequestBody UpdateRentHistoryDto dto) {
+    public ResponseEntity<ChildCommonDto> updateRentHistoryData(@RequestBody UpdateRentHistoryDto updateRentHistoryDto) {
 
-        ChildCommonDto response = rentHistoryService.updateRentHistoryData(dto);
+        ChildCommonDto response = rentHistoryService.updateRentHistoryData(updateRentHistoryDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

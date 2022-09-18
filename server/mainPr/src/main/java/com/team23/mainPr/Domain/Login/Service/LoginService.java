@@ -1,6 +1,7 @@
 package com.team23.mainPr.Domain.Login.Service;
 
 import com.team23.mainPr.Domain.Login.Dto.CreateLoginDto;
+import com.team23.mainPr.Domain.Login.Dto.DoLoginDto;
 import com.team23.mainPr.Domain.Login.Entity.Login;
 import com.team23.mainPr.Domain.Login.Repository.LoginRepository;
 import com.team23.mainPr.Global.CommonService.MemberIdExtractorFromJwt;
@@ -30,7 +31,7 @@ public class LoginService {
     private final JwtBuilder jwtBuilder;
     private final MemberIdExtractorFromJwt memberIdExtractor;
 
-    public ChildCommonDto doLogin(CreateLoginDto dto) {
+    public ChildCommonDto doLogin(DoLoginDto dto) {
 
         try {
             Member member = memberRepository.findByLoginId(dto.getLoginId());

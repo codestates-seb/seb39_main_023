@@ -27,5 +27,5 @@ public class RentPost {
     private ZonedDateTime writeDate;
     private ZonedDateTime updateDate;
     private Integer writerId;
-
+    private Integer viewCount = 0;
 }

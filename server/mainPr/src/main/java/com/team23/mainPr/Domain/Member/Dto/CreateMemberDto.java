@@ -24,5 +24,6 @@ public class CreateMemberDto extends ParentCommonDto {
     private String email;
     private ZonedDateTime createdAt;
     private String profileImageId = "default.png";
+    private String name;
 
 }

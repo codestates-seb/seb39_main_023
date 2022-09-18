@@ -25,7 +25,8 @@ class MainPrApplicationTests {
     String loginId = "wonyong92@github.com";
     String password = "password@@password";
     String nickname = "닉네임1524";
-    CreateMemberDto createMemberDto = new CreateMemberDto(loginId, password, nickname,null,null,null);
+    String name = "홍길동";
+    CreateMemberDto createMemberDto = new CreateMemberDto(loginId, password, nickname,null,null,null,name);
 
     @Test
     void contextLoads() {

@@ -1,9 +1,7 @@
 package com.team23.mainPr.Domain.Member.Controller;
 
+import com.team23.mainPr.Domain.Member.Dto.*;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
-import com.team23.mainPr.Domain.Member.Dto.CreateMemberDto;
-import com.team23.mainPr.Domain.Member.Dto.MemberResponseDto;
-import com.team23.mainPr.Domain.Member.Dto.UpdateMemberDto;
 import com.team23.mainPr.Domain.Member.Service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +45,7 @@ public class MemberController {
         ChildCommonDto<MemberResponseDto> response = memberService.loginValidation(dto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
-    }//validation
+    }
 
     /*
      * refactor : 비밀번호 같은 민감 정보를 전송해도 될까? - response Dto를 만들어서 암호화 할까?
@@ -60,7 +58,7 @@ public class MemberController {
         ChildCommonDto<MemberResponseDto> response = memberService.createMember(dto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
-    }//createMember
+    }
 
     /*
      * refactor : 현재는 전혀 암호화나, 마스킹 또는 맵퍼를 이용해서 리소스 중에 민감 정보를 거르지 않고 응답하고 있다. 프론트-서버 사이에 보안을 믿으면 되는 것일까?
@@ -76,7 +74,7 @@ public class MemberController {
         ChildCommonDto<MemberResponseDto> response = memberService.getMember(memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
-    }//createMember
+    }
 
     @Operation
     @GetMapping("profile/{memberId}")
@@ -85,7 +83,7 @@ public class MemberController {
         ChildCommonDto<MemberResponseDto> response = memberService.getProfile(memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
-    }//createMember
+    }
 
     @Operation
     @DeleteMapping("/delete")
@@ -94,17 +92,51 @@ public class MemberController {
         ChildCommonDto<MemberResponseDto> response = memberService.deleteMember(memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
-    }//deleteMember
+    }
 
     @Operation
     @PutMapping("profile/{memberId}")
-    public ResponseEntity<ChildCommonDto<MemberResponseDto>> updateProfile(@RequestBody UpdateMemberDto dto,
+    public ResponseEntity<ChildCommonDto<MemberResponseDto>> updateProfile(@RequestBody UpdateMemberDto updateMemberDto,
                                                                            @PathVariable Integer memberId) {
 
-        ChildCommonDto<MemberResponseDto> response = memberService.updateProfile(dto, memberId);
+        ChildCommonDto<MemberResponseDto> response = memberService.updateProfile(updateMemberDto, memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
-    }//createMember
+    }
 
+    @Operation
+    @PostMapping("/post/checkExistEmail")
+    public ResponseEntity<ChildCommonDto<MemberResponseDto>> checkExistEmail(@RequestParam String email) {
 
+        ChildCommonDto<MemberResponseDto> response = memberService.checkExistEmail(email);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+
+    @Operation
+    @PostMapping("/post/checkExistId")
+    public ResponseEntity<ChildCommonDto<MemberResponseDto>> checkExistId(@RequestParam String id) {
+
+        ChildCommonDto<MemberResponseDto> response = memberService.checkExistEmail(id);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+
+    @Operation
+    @PostMapping("/post/findId")
+    public ResponseEntity<ChildCommonDto<MemberResponseDto>> findId(@RequestBody FindIdDto findIdDto) {
+
+        ChildCommonDto<MemberResponseDto> response = memberService.findId(findIdDto);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+
+    @Operation
+    @PostMapping("/post/findPassword")
+    public ResponseEntity<ChildCommonDto<MemberResponseDto>> findId(@RequestBody FindPasswordDto findPasswordDto) {
+
+        ChildCommonDto<MemberResponseDto> response = memberService.findPassword(findPasswordDto);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
 }

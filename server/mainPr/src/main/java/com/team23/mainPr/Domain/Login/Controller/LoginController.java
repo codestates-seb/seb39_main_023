@@ -1,6 +1,7 @@
 package com.team23.mainPr.Domain.Login.Controller;
 
 import com.team23.mainPr.Domain.Login.Dto.CreateLoginDto;
+import com.team23.mainPr.Domain.Login.Dto.DoLoginDto;
 import com.team23.mainPr.Domain.Login.Service.LoginService;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,9 +22,9 @@ public class LoginController {
 
     @Operation
     @PostMapping
-    public ResponseEntity<ChildCommonDto> doLogin(@RequestBody CreateLoginDto dto) {
+    public ResponseEntity<ChildCommonDto> doLogin(@RequestBody DoLoginDto doLoginDto) {
 
-        ChildCommonDto response = loginService.doLogin(dto);
+        ChildCommonDto response = loginService.doLogin(doLoginDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
 

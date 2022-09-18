@@ -14,5 +14,6 @@ public class MemberResponseDto extends ParentCommonDto {
     private String email;
     private ZonedDateTime createdAt;
     private String profileImageId;
+    private String name;
 
 }

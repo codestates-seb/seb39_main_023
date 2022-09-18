@@ -39,9 +39,9 @@ public class RentPostController {
 
     @Operation
     @PutMapping("/update")
-    public ResponseEntity<ChildCommonDto> updateRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 게시글 데이터.", required = true) CreateRentPostDto dto,
+    public ResponseEntity<ChildCommonDto> updateRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 게시글 데이터.", required = true) CreateRentPostDto createRentPostDto,
                                                          @RequestParam @Parameter(name = "postId", description = "게시글 식별 번호.", required = true) Integer postId) {
-        ChildCommonDto response = RentPostService.updateRentPost(postId, dto);
+        ChildCommonDto response = RentPostService.updateRentPost(postId, createRentPostDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

@@ -1,12 +1,10 @@
 package com.team23.mainPr.Domain.Member.Service;
 
+import com.team23.mainPr.Domain.Member.Dto.*;
 import com.team23.mainPr.Global.CustomException.CustomException;
 import com.team23.mainPr.Global.CustomException.ErrorData;
 import com.team23.mainPr.Global.DefaultTimeZone;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
-import com.team23.mainPr.Domain.Member.Dto.CreateMemberDto;
-import com.team23.mainPr.Domain.Member.Dto.MemberResponseDto;
-import com.team23.mainPr.Domain.Member.Dto.UpdateMemberDto;
 import com.team23.mainPr.Domain.Member.Entity.Member;
 import com.team23.mainPr.Domain.Member.Mapper.MemberMapper;
 import com.team23.mainPr.Domain.Member.Repository.MemberRepository;
@@ -166,6 +164,77 @@ public class MemberService {
 
         } catch (Exception e) {
 
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    /**
+     * 사용 가능하면 TRUE, 불가능(중복 존재)하면 FALSE
+     * */
+    public ChildCommonDto<MemberResponseDto> checkExistEmail(String email) {
+        try {
+            Member member = memberRepository.findByEmail(email).orElseThrow();
+
+            if (member != null) {
+                return new ChildCommonDto(FAIL.getMsg(), HttpStatus.OK, null);
+            }
+
+            return new ChildCommonDto(TRUE.getMsg(), HttpStatus.BAD_REQUEST, null);
+
+        } catch (Exception e) {
+
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    public ChildCommonDto<MemberResponseDto> checkExistId(String id) {
+        try {
+            Member member = memberRepository.findByEmail(id).orElseThrow();
+
+            if (member != null) {
+                return new ChildCommonDto(FAIL.getMsg(), HttpStatus.OK, null);
+            }
+
+            return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, null);
+
+        } catch (Exception e) {
+
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    public ChildCommonDto<MemberResponseDto> findId(FindIdDto dto) {
+        if(dto.getEmail()==null || dto.getName()== null)
+            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+
+        try{
+            Member member = memberRepository.findByEmail(dto.getEmail()).orElse(null);
+            if(member != null)
+            {
+                if(member.getName().equals(dto.getName()))
+                    return new ChildCommonDto(member.getLoginId(), HttpStatus.OK, null);
+            }
+            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+
+        }catch(Exception e){
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    public ChildCommonDto<MemberResponseDto> findPassword(FindPasswordDto dto) {
+        if(dto.getEmail()==null || dto.getName()== null || dto.getLoginId()==null)
+            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+
+        try{
+            Member member = memberRepository.findByEmail(dto.getEmail()).orElse(null);
+            if(member != null)
+                if(member.getName().equals(dto.getName()))
+                    if(member.getLoginId().equals(dto.getLoginId()))
+                        return new ChildCommonDto(member.getPassword(), HttpStatus.OK, null);
+
+            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+
+        }catch(Exception e){
             return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
