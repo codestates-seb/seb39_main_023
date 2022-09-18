@@ -13,13 +13,13 @@ import lombok.Getter;
 @Getter
 public enum ChildCommonDtoMsgList {
     TRUE("true"),
-    SUC("success"),
+    SUCCESS("success"),
     FAIL("fail"),
     FALSE("false"),
     CREATED("created"),
     NOT_MATCH_PASSWORD("not matched password"),
     NOT_MATCH_ID("not matched loginId"),
-    ERROR("Error");
+    ERROR("error");
 
     private final String msg;
 
