@@ -32,11 +32,29 @@ public class RentHistoryService {
     private final RentHistoryMapper rentHistoryMapper;
     private final DefaultTimeZone defaultTimeZone;
 
-    public ChildCommonDto getRentHistory(Integer memberId) {
+    public ChildCommonDto getReceiveRentHistory(Integer memberId) {
 
         try {
-            List<RentHistory> rentHistoryList = rentHistoryRepository.findAllByTargetMemberId(memberId);
+            List<RentHistory> rentHistoryList = rentHistoryRepository.findByTargetMemberIdAndRentDataTypeTrue(memberId);
 
+            if (rentHistoryList.size() != 0) {
+                List<RentHistoryResponseDto> responses = rentHistoryMapper.map(rentHistoryList);
+                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.OK, new RentHistoryResponseDtos(responses));
+            }
+
+            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e) {
+
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    public ChildCommonDto getSendRentHistory(Integer memberId) {
+
+        try {
+            System.out.println("\n\n");
+            List<RentHistory> rentHistoryList = rentHistoryRepository.findByRequesterIdAndRentDataTypeFalse(memberId);
+            System.out.println("\n\n");
             if (rentHistoryList.size() != 0) {
                 List<RentHistoryResponseDto> responses = rentHistoryMapper.map(rentHistoryList);
                 return new ChildCommonDto(FALSE.getMsg(), HttpStatus.OK, new RentHistoryResponseDtos(responses));
@@ -51,6 +69,9 @@ public class RentHistoryService {
 
     public ChildCommonDto createRentHistory(CreateRentHistoryDto dto) {
         try {
+            if(dto.getTargetMemberId().equals(dto.getRequesterId()))
+                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+
             RentHistory rentHistory = rentHistoryMapper.CreateMap(dto);
             rentHistory.setCreatedTime(defaultTimeZone.getNow());
             rentHistory.setUpdateTime(defaultTimeZone.getNow());
@@ -64,6 +85,9 @@ public class RentHistoryService {
 
             created.setRelateRentHistory(relatedCreated.getRentHistoryId());
             relatedCreated.setRelateRentHistory(created.getRentHistoryId());
+            relatedCreated.setCreatedTime(defaultTimeZone.getNow());
+            relatedCreated.setUpdateTime(defaultTimeZone.getNow());
+
             rentHistoryRepository.flush();
 
             if (created != null && relatedCreated!=null) {
@@ -141,4 +165,5 @@ public class RentHistoryService {
             return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
+
 }

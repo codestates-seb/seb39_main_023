@@ -7,5 +7,8 @@ import java.util.List;
 
 @Repository
 public interface RentHistoryRepository extends JpaRepository<RentHistory, Integer> {
-    List<RentHistory> findAllByTargetMemberId(Integer memberId);
+
+    List<RentHistory> findByRequesterIdAndRentDataTypeFalse(Integer memberId);
+
+    List<RentHistory> findByTargetMemberIdAndRentDataTypeTrue(Integer memberId);
 }

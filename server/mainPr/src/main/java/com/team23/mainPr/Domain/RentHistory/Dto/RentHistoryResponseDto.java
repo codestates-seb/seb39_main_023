@@ -12,7 +12,7 @@ public class RentHistoryResponseDto extends ParentCommonDto {
 
     Integer rentHistoryId;
     Integer targetMemberId;
-    Boolean rentDataType;
+    boolean rentDataType;
     String rentStatus = "not selected";
     ZonedDateTime rentStartDate;
     ZonedDateTime rentEndDate;

@@ -18,10 +18,18 @@ public class RentHistoryController {
     private final RentHistoryService rentHistoryService;
 
     @Operation
-    @GetMapping
-    public ResponseEntity<ChildCommonDto> getRentHistoryData(@RequestParam Integer memberId) {
+    @GetMapping("/getReceive")
+    public ResponseEntity<ChildCommonDto> getReceiveRentHistoryData(@RequestParam Integer memberId) {
 
-        ChildCommonDto response = rentHistoryService.getRentHistory(memberId);
+        ChildCommonDto response = rentHistoryService.getReceiveRentHistory(memberId);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+    @Operation
+    @GetMapping("/getSend")
+    public ResponseEntity<ChildCommonDto> getSendRentHistoryData(@RequestParam Integer memberId) {
+
+        ChildCommonDto response = rentHistoryService.getSendRentHistory(memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

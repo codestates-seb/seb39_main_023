@@ -7,7 +7,7 @@ import java.time.ZonedDateTime;
 public class CreateRentHistoryDto {
 
     Integer targetMemberId;
-    Boolean rentDataType = false;
+    boolean rentDataType = false;
     String rentStatus = "not selected";
     ZonedDateTime rentStartDate;
     ZonedDateTime rentEndDate;
