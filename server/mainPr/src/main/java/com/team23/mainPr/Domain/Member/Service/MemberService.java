@@ -1,19 +1,17 @@
 package com.team23.mainPr.Domain.Member.Service;
 
 import com.team23.mainPr.Domain.Member.Dto.*;
+import com.team23.mainPr.Domain.Member.Entity.Member;
+import com.team23.mainPr.Domain.Member.Mapper.MemberMapper;
+import com.team23.mainPr.Domain.Member.Repository.MemberRepository;
 import com.team23.mainPr.Global.CustomException.CustomException;
 import com.team23.mainPr.Global.CustomException.ErrorData;
 import com.team23.mainPr.Global.DefaultTimeZone;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
-import com.team23.mainPr.Domain.Member.Entity.Member;
-import com.team23.mainPr.Domain.Member.Mapper.MemberMapper;
-import com.team23.mainPr.Domain.Member.Repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import java.util.regex.Pattern;
-
 import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.*;
 
 @Service
@@ -33,10 +31,10 @@ public class MemberService {
      * refactor : 중복 확인 기능과 결합 될 예정
      */
 
-    public ChildCommonDto loginValidation(CreateMemberDto dto) throws RuntimeException {
+    public ChildCommonDto<MemberResponseDto> loginValidation(CreateMemberDto dto) throws RuntimeException {
 
-        String idPattern = "^[a-zA-Z][\\w]{4,20}@{1,1}[\\w]{2,10}(\\.com|\\.net)$";
-        String passworedPattern = "^([@!#%&]{0,}[\\w]{0,}[@!#%&]{0,}){1,}$";
+        String idPattern = "^[a-zA-Z][\\w]{4,20}@.[\\w]{2,10}(\\.com|\\.net)$";
+        String passworedPattern = "^([@!#%&]{0,}[\\w]{0,}[@!#%&]{0,}){1,10}$";
         String nickPattern = "^[\\w가-힣]{2,30}$";
 
         if (!Pattern.matches(idPattern, dto.getLoginId()))
@@ -51,7 +49,7 @@ public class MemberService {
         if (!Pattern.matches(nickPattern, dto.getNickname()))
             throw new CustomException(ErrorData.INVALID_REGISTER_MEMBER_NICKNAME);
 
-        return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, null);
+        return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, null);
     }
 
     /**
@@ -65,45 +63,43 @@ public class MemberService {
      * -> detach 필요 없이 새로운 트랜잭션으로 find 실행 되므로 문제없이 실행결과 확인 할 수 있다.
      */
 
-    public ChildCommonDto createMember(CreateMemberDto dto) throws NullPointerException {
+    public ChildCommonDto<MemberResponseDto> createMember(CreateMemberDto dto) throws NullPointerException {
 
         try {
-        if (memberRepository.findByLoginId(dto.getLoginId()) != null) {
-            return new ChildCommonDto(FAIL.getMsg(), HttpStatus.OK, null);
-        }
-        Member member = new Member();
-        member.setLoginId(dto.getLoginId());
-        member.setPassword(dto.getPassword());
-        member.setNickname(dto.getNickname());
-        member.setEmail(dto.getEmail());
-        member.setProfileImageId(dto.getProfileImageId());
-        member.setCreatedAt(defaultTimeZone.getNow());
+            if (memberRepository.findByLoginId(dto.getLoginId()) != null) {
+                return new ChildCommonDto<>(FAIL.getMsg(), HttpStatus.OK, null);
+            }
+            Member member = new Member();
+            member.setLoginId(dto.getLoginId());
+            member.setPassword(dto.getPassword());
+            member.setNickname(dto.getNickname());
+            member.setEmail(dto.getEmail());
+            member.setProfileImageId(dto.getProfileImageId());
+            member.setCreatedAt(defaultTimeZone.getNow());
 
-        Member created = memberRepository.save(member);
+            Member created = memberRepository.save(member);
 
-        if (created != null)
-            return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberResponse(created));
 
-        return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, memberMapper.MemberToMemberResponse(created));
+            return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberResponse(created));
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }//createMember
 
-    public ChildCommonDto getMember(Integer memberId) {
+    public ChildCommonDto<MemberResponseDto> getMember(Integer memberId) {
 
         try {
             Member member = memberRepository.findById(memberId).orElse(null);
 
             if (member != null)
-                return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberResponse(member));
+                return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberResponse(member));
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
@@ -114,7 +110,7 @@ public class MemberService {
      * </pre>
      */
 
-    public ChildCommonDto deleteMember(Integer memberId) {
+    public ChildCommonDto<MemberResponseDto> deleteMember(Integer memberId) {
 
         try {
             Member member = memberRepository.findById(memberId).orElseThrow();
@@ -122,32 +118,32 @@ public class MemberService {
             memberRepository.delete(member);
 
             if (memberRepository.findById(memberId).orElse(null) == null)
-                return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, null);
+                return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, null);
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
-    public ChildCommonDto<MemberResponseDto> getProfile(Integer memberId) {
+    public ChildCommonDto<MemberProfileDto> getProfile(Integer memberId) {
 
         try {
             Member member = memberRepository.findById(memberId).orElse(null);
 
             if (member != null)
-                return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberProfileDto(member));
+                return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberProfileDto(member));
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
-    public ChildCommonDto<MemberResponseDto> updateProfile(UpdateMemberDto dto, Integer memberId) {
+    public ChildCommonDto<MemberProfileDto> updateProfile(UpdateMemberDto dto, Integer memberId) {
         try {
             Member member = memberRepository.findById(memberId).orElse(null);
 
@@ -157,33 +153,33 @@ public class MemberService {
                 if (dto.getProfileImageId() != null)
                     member.setProfileImageId(dto.getNickname());
                 memberRepository.flush();
-                return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberProfileDto(member));
+                return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, memberMapper.MemberToMemberProfileDto(member));
             }
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
     /**
      * 사용 가능하면 TRUE, 불가능(중복 존재)하면 FALSE
-     * */
+     */
     public ChildCommonDto<MemberResponseDto> checkExistEmail(String email) {
         try {
             Member member = memberRepository.findByEmail(email).orElseThrow();
 
             if (member != null) {
-                return new ChildCommonDto(FAIL.getMsg(), HttpStatus.OK, null);
+                return new ChildCommonDto<>(FAIL.getMsg(), HttpStatus.OK, null);
             }
 
-            return new ChildCommonDto(TRUE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
@@ -192,50 +188,46 @@ public class MemberService {
             Member member = memberRepository.findByEmail(id).orElseThrow();
 
             if (member != null) {
-                return new ChildCommonDto(FAIL.getMsg(), HttpStatus.OK, null);
+                return new ChildCommonDto<>(FAIL.getMsg(), HttpStatus.OK, null);
             }
 
-            return new ChildCommonDto(TRUE.getMsg(), HttpStatus.OK, null);
+            return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, null);
 
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
     public ChildCommonDto<MemberResponseDto> findId(FindIdDto dto) {
-        if(dto.getEmail()==null || dto.getName()== null)
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+        if (dto.getEmail() == null || dto.getName() == null)
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
-        try{
+        try {
             Member member = memberRepository.findByEmail(dto.getEmail()).orElse(null);
-            if(member != null)
-            {
-                if(member.getName().equals(dto.getName()))
-                    return new ChildCommonDto(member.getLoginId(), HttpStatus.OK, null);
-            }
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
-        }catch(Exception e){
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            if (member != null && member.getName().equals(dto.getName()))
+                    return new ChildCommonDto<>(member.getLoginId(), HttpStatus.OK, null);
+
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e) {
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
     public ChildCommonDto<MemberResponseDto> findPassword(FindPasswordDto dto) {
-        if(dto.getEmail()==null || dto.getName()== null || dto.getLoginId()==null)
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+        if (dto.getEmail() == null || dto.getName() == null || dto.getLoginId() == null)
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
-        try{
+        try {
             Member member = memberRepository.findByEmail(dto.getEmail()).orElse(null);
-            if(member != null)
-                if(member.getName().equals(dto.getName()))
-                    if(member.getLoginId().equals(dto.getLoginId()))
-                        return new ChildCommonDto(member.getPassword(), HttpStatus.OK, null);
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+                if (member != null &&member.getName().equals(dto.getName()) && member.getLoginId().equals(dto.getLoginId()))
+                    return new ChildCommonDto<>(member.getPassword(), HttpStatus.OK, null);
 
-        }catch(Exception e){
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e) {
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 }

@@ -1,9 +1,11 @@
 package com.team23.mainPr.Domain.RentHistory.Controller;
 
 import com.team23.mainPr.Domain.RentHistory.Dto.CreateRentHistoryDto;
+import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDto;
+import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDtos;
+import com.team23.mainPr.Domain.RentHistory.Dto.UpdateRentHistoryDto;
 import com.team23.mainPr.Domain.RentHistory.Service.RentHistoryService;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
-import com.team23.mainPr.Domain.RentHistory.Dto.UpdateRentHistoryDto;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,44 +21,45 @@ public class RentHistoryController {
 
     @Operation
     @GetMapping("/getReceive")
-    public ResponseEntity<ChildCommonDto> getReceiveRentHistoryData(@RequestParam Integer memberId) {
+    public ResponseEntity<ChildCommonDto<RentHistoryResponseDtos>> getReceiveRentHistoryData(@RequestParam Integer memberId) {
 
-        ChildCommonDto response = rentHistoryService.getReceiveRentHistory(memberId);
+        ChildCommonDto<RentHistoryResponseDtos> response = rentHistoryService.getReceiveRentHistory(memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
+
     @Operation
     @GetMapping("/getSend")
-    public ResponseEntity<ChildCommonDto> getSendRentHistoryData(@RequestParam Integer memberId) {
+    public ResponseEntity<ChildCommonDto<RentHistoryResponseDtos>> getSendRentHistoryData(@RequestParam Integer memberId) {
 
-        ChildCommonDto response = rentHistoryService.getSendRentHistory(memberId);
+        ChildCommonDto<RentHistoryResponseDtos> response = rentHistoryService.getSendRentHistory(memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @Operation
     @PostMapping
-    public ResponseEntity<ChildCommonDto> addRentHistoryData(@RequestBody CreateRentHistoryDto createRentHistoryDto) {
+    public ResponseEntity<ChildCommonDto<RentHistoryResponseDto>> addRentHistoryData(@RequestBody CreateRentHistoryDto createRentHistoryDto) {
 
-        ChildCommonDto response = rentHistoryService.createRentHistory(createRentHistoryDto);
+        ChildCommonDto<RentHistoryResponseDto> response = rentHistoryService.createRentHistory(createRentHistoryDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @Operation
     @PutMapping
-    public ResponseEntity<ChildCommonDto> updateRentHistoryData(@RequestBody UpdateRentHistoryDto updateRentHistoryDto) {
+    public ResponseEntity<ChildCommonDto<RentHistoryResponseDto>> updateRentHistoryData(@RequestBody UpdateRentHistoryDto updateRentHistoryDto) {
 
-        ChildCommonDto response = rentHistoryService.updateRentHistoryData(updateRentHistoryDto);
+        ChildCommonDto<RentHistoryResponseDto> response = rentHistoryService.updateRentHistoryData(updateRentHistoryDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @Operation
     @PostMapping("/delete/{rentHistoryId}")
-    public ResponseEntity<ChildCommonDto> delete(@PathVariable Integer rentHistoryId) {
+    public ResponseEntity<ChildCommonDto<RentHistoryResponseDto>> delete(@PathVariable Integer rentHistoryId) {
 
-        ChildCommonDto response = rentHistoryService.deleteRentHistory(rentHistoryId);
+        ChildCommonDto<RentHistoryResponseDto> response = rentHistoryService.deleteRentHistory(rentHistoryId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

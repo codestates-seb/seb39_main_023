@@ -9,6 +9,6 @@ public class UpdateRentPostDto {
 
     private String rentPostContents;
     private String rentPostName;
-    private Boolean rentStatus=false;
+    private Boolean rentStatus = false;
 }
 

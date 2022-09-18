@@ -1,9 +1,10 @@
 package com.team23.mainPr.Domain.RentPost.Controller;
 
-import com.team23.mainPr.Domain.RentPost.Dto.UpdateRentPostDto;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
+import com.team23.mainPr.Domain.RentPost.Dto.RentPostResponseDto;
+import com.team23.mainPr.Domain.RentPost.Dto.UpdateRentPostDto;
 import com.team23.mainPr.Domain.RentPost.Service.RentPostService;
+import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,9 @@ public class RentPostController {
 
     @Operation
     @PostMapping("/post")
-    public ResponseEntity<ChildCommonDto> createRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 렌트 게시글 데이터.", required = true) CreateRentPostDto dto) {
-        ChildCommonDto response = RentPostService.createRentPost(dto);
+    public ResponseEntity<ChildCommonDto<RentPostResponseDto>> createRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 렌트 게시글 데이터.", required = true) CreateRentPostDto dto) {
+
+        ChildCommonDto<RentPostResponseDto> response = RentPostService.createRentPost(dto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
@@ -40,17 +42,17 @@ public class RentPostController {
 
     @Operation
     @PutMapping("/update")
-    public ResponseEntity<ChildCommonDto> updateRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 게시글 데이터.", required = true) UpdateRentPostDto updateRentPostDto,
-                                                         @RequestParam @Parameter(name = "postId", description = "게시글 식별 번호.", required = true) Integer postId) {
-        ChildCommonDto response = RentPostService.updateRentPost(postId, updateRentPostDto);
+    public ResponseEntity<ChildCommonDto<RentPostResponseDto>> updateRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 게시글 데이터.", required = true) UpdateRentPostDto updateRentPostDto,
+                                                                                 @RequestParam @Parameter(name = "postId", description = "게시글 식별 번호.", required = true) Integer postId) {
+        ChildCommonDto<RentPostResponseDto> response = RentPostService.updateRentPost(postId, updateRentPostDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
 
     @Operation
     @DeleteMapping("/delete")
-    public ResponseEntity<ChildCommonDto> updateRentPost(@RequestParam @Parameter(name = "postId", description = "게시글 식별 번호.", required = true) Integer postId) {
-        ChildCommonDto response = RentPostService.deleteRentPost(postId);
+    public ResponseEntity<ChildCommonDto<RentPostResponseDto>> updateRentPost(@RequestParam @Parameter(name = "postId", description = "게시글 식별 번호.", required = true) Integer postId) {
+        ChildCommonDto<RentPostResponseDto> response = RentPostService.deleteRentPost(postId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
@@ -63,8 +65,8 @@ public class RentPostController {
 
     @Operation
     @GetMapping("/{postId}")
-    public ResponseEntity<ChildCommonDto> getRentPost(@PathVariable @Parameter(name = "postId", description = "게시글 식별 번호.", required = true) Integer postId) {
-        ChildCommonDto response = RentPostService.getRentPost(postId);
+    public ResponseEntity<ChildCommonDto<RentPostResponseDto>> getRentPost(@PathVariable @Parameter(name = "postId", description = "게시글 식별 번호.", required = true) Integer postId) {
+        ChildCommonDto<RentPostResponseDto> response = RentPostService.getRentPost(postId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.ZonedDateTime;
-
 /**
  * swagger 이슈 - private 일때 제대로 인식이 안되는 경우 발생, public으로 사용시 제대로 스웨거 동작
  */
@@ -22,7 +20,6 @@ public class CreateMemberDto extends ParentCommonDto {
     private String password;
     private String nickname;
     private String email;
-    private ZonedDateTime createdAt;
     private String profileImageId = "default.png";
     private String name;
 

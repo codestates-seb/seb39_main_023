@@ -1,7 +1,5 @@
 package com.team23.mainPr.Domain.RentHistory.Service;
 
-import com.team23.mainPr.Global.DefaultTimeZone;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import com.team23.mainPr.Domain.RentHistory.Dto.CreateRentHistoryDto;
 import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDto;
 import com.team23.mainPr.Domain.RentHistory.Dto.RentHistoryResponseDtos;
@@ -9,10 +7,13 @@ import com.team23.mainPr.Domain.RentHistory.Dto.UpdateRentHistoryDto;
 import com.team23.mainPr.Domain.RentHistory.Entity.RentHistory;
 import com.team23.mainPr.Domain.RentHistory.Mapper.RentHistoryMapper;
 import com.team23.mainPr.Domain.RentHistory.Repository.RentHistoryRepository;
+import com.team23.mainPr.Global.DefaultTimeZone;
+import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
+
 import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.*;
 
 /**
@@ -32,45 +33,45 @@ public class RentHistoryService {
     private final RentHistoryMapper rentHistoryMapper;
     private final DefaultTimeZone defaultTimeZone;
 
-    public ChildCommonDto getReceiveRentHistory(Integer memberId) {
+    public ChildCommonDto<RentHistoryResponseDtos> getReceiveRentHistory(Integer memberId) {
 
         try {
             List<RentHistory> rentHistoryList = rentHistoryRepository.findByTargetMemberIdAndRentDataTypeTrue(memberId);
 
             if (rentHistoryList.size() != 0) {
                 List<RentHistoryResponseDto> responses = rentHistoryMapper.map(rentHistoryList);
-                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.OK, new RentHistoryResponseDtos(responses));
+                return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.OK, new RentHistoryResponseDtos(responses));
             }
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
-    public ChildCommonDto getSendRentHistory(Integer memberId) {
+    public ChildCommonDto<RentHistoryResponseDtos> getSendRentHistory(Integer memberId) {
 
         try {
-            System.out.println("\n\n");
             List<RentHistory> rentHistoryList = rentHistoryRepository.findByRequesterIdAndRentDataTypeFalse(memberId);
-            System.out.println("\n\n");
+
             if (rentHistoryList.size() != 0) {
                 List<RentHistoryResponseDto> responses = rentHistoryMapper.map(rentHistoryList);
-                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.OK, new RentHistoryResponseDtos(responses));
+
+                return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.OK, new RentHistoryResponseDtos(responses));
             }
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
-    public ChildCommonDto createRentHistory(CreateRentHistoryDto dto) {
+    public ChildCommonDto<RentHistoryResponseDto> createRentHistory(CreateRentHistoryDto dto) {
         try {
-            if(dto.getTargetMemberId().equals(dto.getRequesterId()))
-                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            if (dto.getTargetMemberId().equals(dto.getRequesterId()))
+                return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
             RentHistory rentHistory = rentHistoryMapper.CreateMap(dto);
             rentHistory.setCreatedTime(defaultTimeZone.getNow());
@@ -90,18 +91,15 @@ public class RentHistoryService {
 
             rentHistoryRepository.flush();
 
-            if (created != null && relatedCreated!=null) {
-                return new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, rentHistoryMapper.responseMap(created));
-            }
+            return new ChildCommonDto<>(SUC.getMsg(), HttpStatus.OK, rentHistoryMapper.responseMap(created));
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
-    public ChildCommonDto deleteRentHistory(Integer rentHistoryId) {
+    public ChildCommonDto<RentHistoryResponseDto> deleteRentHistory(Integer rentHistoryId) {
         try {
             RentHistory rentHistory = rentHistoryRepository.findById(rentHistoryId).orElse(null);
 
@@ -111,35 +109,34 @@ public class RentHistoryService {
                 rentHistoryRepository.delete(rentHistory);
                 rentHistoryRepository.deleteById(relatedRentHistoryId);
 
-                new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, null);
+                new ChildCommonDto<>(SUC.getMsg(), HttpStatus.OK, null);
             }
 
-            return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
-    public ChildCommonDto updateRentHistoryData(UpdateRentHistoryDto dto) {
+    public ChildCommonDto<RentHistoryResponseDto> updateRentHistoryData(UpdateRentHistoryDto dto) {
         try {
 
             RentHistory rentHistory = rentHistoryRepository.findById(dto.getRentHistoryId()).orElseThrow();
 
-            if(dto.getRentHistoryId()==null &&dto.getRentStartDate()==null &&dto.getRentEndDate()==null &&dto.getMsg()==null && dto.getRentStatus()==rentHistory.getRentStatus())
-            {
-                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            if (dto.getRentHistoryId() == null && dto.getRentStartDate() == null && dto.getRentEndDate() == null && dto.getMsg() == null && dto.getRentStatus().equals(rentHistory.getRentStatus())) {
+                return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
             }
 
-            if(dto.getRentHistoryId()!=null)
+            if (dto.getRentHistoryId() != null)
                 rentHistory.setRentStatus(dto.getRentStatus());
-            if(dto.getRentStartDate()!=null)
+            if (dto.getRentStartDate() != null)
                 rentHistory.setRentStartDate(dto.getRentStartDate());
-            if(dto.getRentEndDate()!=null)
+            if (dto.getRentEndDate() != null)
                 rentHistory.setRentEndDate(dto.getRentEndDate());
-            if(dto.getMsg()!=null)
+            if (dto.getMsg() != null)
                 rentHistory.setMsg(dto.getMsg());
-            if(!rentHistory.getRentDataType() &&dto.getRentStatus()==rentHistory.getRentStatus()) //렌트 요청 타입이 Receive 일때만 수락, 거절 선택 가능
+            if (!rentHistory.getRentDataType() && dto.getRentStatus().equals(rentHistory.getRentStatus())) //렌트 요청 타입이 Receive 일때만 수락, 거절 선택 가능
                 rentHistory.setRentStatus(dto.getRentStatus());
 
             rentHistory.setUpdateTime(defaultTimeZone.getNow());
@@ -156,13 +153,13 @@ public class RentHistoryService {
             rentHistoryRepository.flush();
 
             if (rentHistory != null && relatedRentHistory != null) {
-                return new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, rentHistoryMapper.responseMap(rentHistory));
+                return new ChildCommonDto<>(SUC.getMsg(), HttpStatus.OK, rentHistoryMapper.responseMap(rentHistory));
             }
 
-            return new ChildCommonDto(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);
+            return new ChildCommonDto<>(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);
         } catch (Exception e) {
 
-            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 

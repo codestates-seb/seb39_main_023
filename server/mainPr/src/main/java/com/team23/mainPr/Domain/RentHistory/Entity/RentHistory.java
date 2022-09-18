@@ -15,10 +15,6 @@ public class RentHistory {
     Integer rentHistoryId;
     Integer targetMemberId;// ref member
     boolean rentDataType = false;//send, receive 구별
-    public boolean getRentDataType()
-    {
-        return this.rentDataType;
-    }
     String rentStatus = "not selected";//수락-미선택-거절 3case 표현 필요
     ZonedDateTime rentStartDate;
     ZonedDateTime rentEndDate;
@@ -28,4 +24,8 @@ public class RentHistory {
     ZonedDateTime createdTime;
     ZonedDateTime updateTime;
     Integer relateRentHistory;
+
+    public boolean getRentDataType() {
+        return this.rentDataType;
+    }
 }

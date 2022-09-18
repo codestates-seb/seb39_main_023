@@ -1,7 +1,6 @@
 package com.team23.mainPr.Domain.Member.Entity;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

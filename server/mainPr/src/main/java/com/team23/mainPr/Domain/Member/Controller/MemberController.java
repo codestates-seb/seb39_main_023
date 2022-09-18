@@ -1,8 +1,8 @@
 package com.team23.mainPr.Domain.Member.Controller;
 
 import com.team23.mainPr.Domain.Member.Dto.*;
-import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import com.team23.mainPr.Domain.Member.Service.MemberService;
+import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,20 +29,21 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    /*
+    /**
+     * <pre>
      * ETC : 모델 어트리뷰트 vs 리퀘스트 바디
      * ETC : 스프링 validation
      * description : 회원 가입에 연관된 기능이니까 register의 하위 리소스? 컨트롤러?로 네이밍
      * refactor : 공통 응답 dto를 만들까? - 수행결과 메세지(String) + 개별 응답 dto(Object? 인터페이스 하나 만들어서 제네릭으로 타입세이프?) - mapstruct 이용해서?
      * refactor : 500 에러 핸들링을 위해서 throws ClassCastException 추가
-     *
+     * </pre>
      */
 
     @Operation
-    @PostMapping("/post/check-input")
-    public ResponseEntity<ChildCommonDto<MemberResponseDto>> checkInput(@RequestBody CreateMemberDto dto) throws RuntimeException {
+    @PostMapping("/post/checkInput")
+    public ResponseEntity<ChildCommonDto<MemberResponseDto>> checkInput(@RequestBody CreateMemberDto createMemberDto) throws RuntimeException {
 
-        ChildCommonDto<MemberResponseDto> response = memberService.loginValidation(dto);
+        ChildCommonDto<MemberResponseDto> response = memberService.loginValidation(createMemberDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
@@ -78,9 +79,9 @@ public class MemberController {
 
     @Operation
     @GetMapping("profile/{memberId}")
-    public ResponseEntity<ChildCommonDto<MemberResponseDto>> getProfile(@PathVariable Integer memberId) {
+    public ResponseEntity<ChildCommonDto<MemberProfileDto>> getProfile(@PathVariable Integer memberId) {
 
-        ChildCommonDto<MemberResponseDto> response = memberService.getProfile(memberId);
+        ChildCommonDto<MemberProfileDto> response = memberService.getProfile(memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
@@ -96,10 +97,10 @@ public class MemberController {
 
     @Operation
     @PutMapping("profile/{memberId}")
-    public ResponseEntity<ChildCommonDto<MemberResponseDto>> updateProfile(@RequestBody UpdateMemberDto updateMemberDto,
+    public ResponseEntity<ChildCommonDto<MemberProfileDto>> updateProfile(@RequestBody UpdateMemberDto updateMemberDto,
                                                                            @PathVariable Integer memberId) {
 
-        ChildCommonDto<MemberResponseDto> response = memberService.updateProfile(updateMemberDto, memberId);
+        ChildCommonDto<MemberProfileDto> response = memberService.updateProfile(updateMemberDto, memberId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

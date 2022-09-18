@@ -7,9 +7,9 @@ import java.time.ZonedDateTime;
 public class UpdateRentHistoryDto {
 
     Integer rentHistoryId;
-    String rentStatus ;
+    String rentStatus;
     ZonedDateTime rentStartDate;
     ZonedDateTime rentEndDate;
-    String msg ;
+    String msg;
 }
 

@@ -12,6 +12,7 @@ import springfox.documentation.swagger.web.DocExpansion;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
