@@ -49,7 +49,7 @@ public class RentHistoryService {
         }
     }
 
-    public ChildCommonDto addRentHistory(CreateRentHistoryDto dto) {
+    public ChildCommonDto createRentHistory(CreateRentHistoryDto dto) {
         try {
             RentHistory rentHistory = rentHistoryMapper.CreateMap(dto);
             rentHistory.setCreatedTime(defaultTimeZone.getNow());
@@ -57,7 +57,16 @@ public class RentHistoryService {
 
             RentHistory created = rentHistoryRepository.save(rentHistory);
 
-            if (created != null) {
+            RentHistory relatedRentHistory = rentHistoryMapper.CreateMap(dto);
+            relatedRentHistory.setRentDataType(true);
+
+            RentHistory relatedCreated = rentHistoryRepository.save(relatedRentHistory);
+
+            created.setRelateRentHistory(relatedCreated.getRentHistoryId());
+            relatedCreated.setRelateRentHistory(created.getRentHistoryId());
+            rentHistoryRepository.flush();
+
+            if (created != null && relatedCreated!=null) {
                 return new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, rentHistoryMapper.responseMap(created));
             }
 
@@ -73,7 +82,11 @@ public class RentHistoryService {
             RentHistory rentHistory = rentHistoryRepository.findById(rentHistoryId).orElse(null);
 
             if (rentHistory != null) {
+                Integer relatedRentHistoryId = rentHistory.getRentHistoryId();
+
                 rentHistoryRepository.delete(rentHistory);
+                rentHistoryRepository.deleteById(relatedRentHistoryId);
+
                 new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, null);
             }
 
@@ -102,15 +115,24 @@ public class RentHistoryService {
                 rentHistory.setRentEndDate(dto.getRentEndDate());
             if(dto.getMsg()!=null)
                 rentHistory.setMsg(dto.getMsg());
-            if(dto.getRentStatus()==rentHistory.getRentStatus())
+            if(!rentHistory.getRentDataType() &&dto.getRentStatus()==rentHistory.getRentStatus()) //렌트 요청 타입이 Receive 일때만 수락, 거절 선택 가능
                 rentHistory.setRentStatus(dto.getRentStatus());
 
             rentHistory.setUpdateTime(defaultTimeZone.getNow());
 
-            RentHistory created = rentHistoryRepository.save(rentHistory);
+            RentHistory relatedRentHistory = rentHistoryRepository.findById(rentHistory.getRentHistoryId()).orElseThrow(); // 불일치 발생 수정 작업 진행하도록 해야함
 
-            if (created != null) {
-                return new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, rentHistoryMapper.responseMap(created));
+            relatedRentHistory.setRentStatus(dto.getRentStatus());
+            relatedRentHistory.setRentStartDate(dto.getRentStartDate());
+            relatedRentHistory.setRentEndDate(dto.getRentEndDate());
+            relatedRentHistory.setMsg(dto.getMsg());
+            relatedRentHistory.setRentStatus(dto.getRentStatus());
+            relatedRentHistory.setUpdateTime(defaultTimeZone.getNow());
+
+            rentHistoryRepository.flush();
+
+            if (rentHistory != null && relatedRentHistory != null) {
+                return new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, rentHistoryMapper.responseMap(rentHistory));
             }
 
             return new ChildCommonDto(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);

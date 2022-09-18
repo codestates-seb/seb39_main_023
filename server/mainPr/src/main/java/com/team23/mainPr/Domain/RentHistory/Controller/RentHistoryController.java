@@ -30,7 +30,7 @@ public class RentHistoryController {
     @PostMapping
     public ResponseEntity<ChildCommonDto> addRentHistoryData(@RequestBody CreateRentHistoryDto createRentHistoryDto) {
 
-        ChildCommonDto response = rentHistoryService.addRentHistory(createRentHistoryDto);
+        ChildCommonDto response = rentHistoryService.createRentHistory(createRentHistoryDto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
@@ -40,6 +40,15 @@ public class RentHistoryController {
     public ResponseEntity<ChildCommonDto> updateRentHistoryData(@RequestBody UpdateRentHistoryDto updateRentHistoryDto) {
 
         ChildCommonDto response = rentHistoryService.updateRentHistoryData(updateRentHistoryDto);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+
+    @Operation
+    @PostMapping("/delete/{rentHistoryId}")
+    public ResponseEntity<ChildCommonDto> delete(@PathVariable Integer rentHistoryId) {
+
+        ChildCommonDto response = rentHistoryService.deleteRentHistory(rentHistoryId);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

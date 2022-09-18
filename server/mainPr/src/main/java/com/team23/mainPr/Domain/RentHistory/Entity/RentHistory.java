@@ -23,4 +23,5 @@ public class RentHistory {
     Integer targetPosId;//ref rentPost
     ZonedDateTime createdTime;
     ZonedDateTime updateTime;
+    Integer relateRentHistory;
 }
