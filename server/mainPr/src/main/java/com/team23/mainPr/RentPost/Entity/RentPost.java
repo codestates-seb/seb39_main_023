@@ -26,4 +26,6 @@ public class RentPost {
     private String rentPostName;
     private ZonedDateTime writeDate;
     private ZonedDateTime updateDate;
+    private Integer writerId;
+
 }

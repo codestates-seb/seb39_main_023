@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 public class RentHistoryResponseDto extends ParentCommonDto {
 
     Integer rentHistoryId;
-    Integer ownerId;
+    Integer targetMemberId;
     Boolean rentDataType;
     String rentStatus = "not selected";
     ZonedDateTime rentStartDate;

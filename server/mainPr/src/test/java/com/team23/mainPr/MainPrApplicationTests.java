@@ -3,7 +3,7 @@ package com.team23.mainPr;
 import com.team23.mainPr.Dto.ChildCommonDto;
 import com.team23.mainPr.Member.Controller.MemberController;
 import com.team23.mainPr.Member.Dto.CreateMemberDto;
-import com.team23.mainPr.Member.Dto.MemberResponse;
+import com.team23.mainPr.Member.Dto.MemberResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +31,12 @@ class MainPrApplicationTests {
     void contextLoads() {
     }
 
-
     @DisplayName(value = "회원가입 입력 데이터 유효성 검증 기능 테스트 = 성공/실패 검증")
     @Test
     void validateCreateUserData() {
 
-        ResponseEntity<ChildCommonDto<MemberResponse>> result = memberController.checkInput(createMemberDto);
-        ChildCommonDto<MemberResponse> dto = (ChildCommonDto) result.getBody();
+        ResponseEntity<ChildCommonDto<MemberResponseDto>> result = memberController.checkInput(createMemberDto);
+        ChildCommonDto<MemberResponseDto> dto = (ChildCommonDto) result.getBody();
         assertThat(dto.getMsg()).isEqualTo(TRUE.getMsg())
                 .as("check user ID, password");
     }
@@ -49,9 +48,9 @@ class MainPrApplicationTests {
     @Test
     void createUserTest() {
 
-        ResponseEntity<ChildCommonDto<MemberResponse>> result = memberController.createMember(createMemberDto);
-        ChildCommonDto<MemberResponse> Cdto = (ChildCommonDto) result.getBody();
-        MemberResponse dto = (MemberResponse) Cdto.getDto();
+        ResponseEntity<ChildCommonDto<MemberResponseDto>> result = memberController.createMember(createMemberDto);
+        ChildCommonDto<MemberResponseDto> Cdto = (ChildCommonDto) result.getBody();
+        MemberResponseDto dto = (MemberResponseDto) Cdto.getDto();
 
         assertThat(dto.getLoginId()).isEqualTo(loginId)
                 .as("check user ID");

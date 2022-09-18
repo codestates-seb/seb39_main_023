@@ -30,9 +30,7 @@ public class RentPostService {
     public ChildCommonDto createRentPost(CreateRentPostDto dto) {
 
         try {
-            RentPost post = new RentPost();
-            post.setRentPostContents(dto.getRentPostContents());
-            post.setRentPostName(dto.getRentPostName());
+            RentPost post = rentPostMapper.createMap(dto);
             post.setUpdateDate(defaultTimeZone.getNow());
             post.setWriteDate(defaultTimeZone.getNow());
 
@@ -52,7 +50,7 @@ public class RentPostService {
     }
 
     public ChildCommonDto updateRentPost(Integer postId, CreateRentPostDto dto) {
-        
+
         try {
             RentPost post = rentPostRepository.findById(postId).orElseThrow();
             post.setRentPostContents(dto.getRentPostContents());

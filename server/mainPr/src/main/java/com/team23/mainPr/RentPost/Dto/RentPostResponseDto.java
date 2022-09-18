@@ -13,4 +13,6 @@ public class RentPostResponseDto extends ParentCommonDto {
     private String rentPostName;
     private ZonedDateTime writeDate;
     private ZonedDateTime updateDate;
+    private Integer writerId;
+
 }

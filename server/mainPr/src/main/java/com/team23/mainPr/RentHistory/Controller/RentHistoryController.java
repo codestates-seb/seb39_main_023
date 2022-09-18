@@ -2,6 +2,7 @@ package com.team23.mainPr.RentHistory.Controller;
 
 import com.team23.mainPr.Dto.ChildCommonDto;
 import com.team23.mainPr.RentHistory.Dto.CreateRentHistoryDto;
+import com.team23.mainPr.RentHistory.Dto.UpdateRentHistoryDto;
 import com.team23.mainPr.RentHistory.Service.RentHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,15 @@ public class RentHistoryController {
     public ResponseEntity<ChildCommonDto> addRentHistoryData(@RequestBody CreateRentHistoryDto dto) {
 
         ChildCommonDto response = rentHistoryService.addRentHistory(dto);
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+
+    @Operation
+    @PutMapping
+    public ResponseEntity<ChildCommonDto> updateRentHistoryData(@RequestBody UpdateRentHistoryDto dto) {
+
+        ChildCommonDto response = rentHistoryService.updateRentHistoryData(dto);
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

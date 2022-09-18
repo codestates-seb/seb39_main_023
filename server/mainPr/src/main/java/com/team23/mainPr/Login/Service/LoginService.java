@@ -1,5 +1,6 @@
 package com.team23.mainPr.Login.Service;
 
+import com.team23.mainPr.CommonService.MemberIdExtractorFromJwt;
 import com.team23.mainPr.DefaultTimeZone;
 import com.team23.mainPr.Dto.ChildCommonDto;
 import com.team23.mainPr.Jwt.Service.JwtBuilder;
@@ -27,6 +28,7 @@ public class LoginService {
     private final LoginMapper loginMapper;
     private final DefaultTimeZone defaultTimeZone;
     private final JwtBuilder jwtBuilder;
+    private final MemberIdExtractorFromJwt memberIdExtractor;
 
     public ChildCommonDto doLogin(CreateLoginDto dto) {
 

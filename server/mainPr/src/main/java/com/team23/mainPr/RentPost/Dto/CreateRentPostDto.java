@@ -9,5 +9,6 @@ public class CreateRentPostDto {
 
     private String rentPostContents;
     private String rentPostName;
+    private Integer writerId;
 
 }

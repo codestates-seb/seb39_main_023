@@ -41,7 +41,7 @@ public class MemberController {
      */
 
     @Operation
-    @PostMapping("/register/check-input")
+    @PostMapping("/post/check-input")
     public ResponseEntity<ChildCommonDto<MemberResponseDto>> checkInput(@RequestBody CreateMemberDto dto) throws RuntimeException {
 
         ChildCommonDto<MemberResponseDto> response = memberService.loginValidation(dto);
@@ -54,7 +54,7 @@ public class MemberController {
      */
 
     @Operation(summary = "회원 가입.", description = "데이터베이스에 회원 정보를 저장하고, 생성된 회원정보를 응답한다.")
-    @PostMapping("/register")
+    @PostMapping("/post")
     public ResponseEntity<ChildCommonDto<MemberResponseDto>> createMember(@RequestBody CreateMemberDto dto) {
 
         ChildCommonDto<MemberResponseDto> response = memberService.createMember(dto);

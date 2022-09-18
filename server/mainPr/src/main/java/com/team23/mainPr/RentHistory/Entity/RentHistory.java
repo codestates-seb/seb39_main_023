@@ -13,8 +13,8 @@ public class RentHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer rentHistoryId;
-    Integer ownerId;// ref member
-    Boolean rentDataType = false;
+    Integer targetMemberId;// ref member
+    Boolean rentDataType = false;//send, receive 구별
     String rentStatus = "not selected";
     ZonedDateTime rentStartDate;
     ZonedDateTime rentEndDate;

@@ -6,12 +6,10 @@ import java.time.ZonedDateTime;
 @Data
 public class CreateRentHistoryDto {
 
-    Integer ownerId;
+    Integer targetMemberId;
     Boolean rentDataType = false;
     String rentStatus = "not selected";
-
     ZonedDateTime rentStartDate;
-
     ZonedDateTime rentEndDate;
     Integer requesterId;
     String msg = "nothing";

@@ -12,7 +12,6 @@ import springfox.documentation.swagger.web.DocExpansion;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
@@ -32,7 +31,7 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(regex("/(member|profile|RentPost)/.*"))//스웨거에 여러 path 추가하기
+                .paths(regex("/(member|rentPost|login|rentHistory|logout).*"))//스웨거에 여러 path 추가하기
                 .apis(RequestHandlerSelectors.withClassAnnotation(Controller.class))
                 .build();
     }

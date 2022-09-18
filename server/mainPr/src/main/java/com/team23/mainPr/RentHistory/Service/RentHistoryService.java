@@ -5,6 +5,7 @@ import com.team23.mainPr.Dto.ChildCommonDto;
 import com.team23.mainPr.RentHistory.Dto.CreateRentHistoryDto;
 import com.team23.mainPr.RentHistory.Dto.RentHistoryResponseDto;
 import com.team23.mainPr.RentHistory.Dto.RentHistoryResponseDtos;
+import com.team23.mainPr.RentHistory.Dto.UpdateRentHistoryDto;
 import com.team23.mainPr.RentHistory.Entity.RentHistory;
 import com.team23.mainPr.RentHistory.Mapper.RentHistoryMapper;
 import com.team23.mainPr.RentHistory.Repository.RentHistoryRepository;
@@ -12,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
 import static com.team23.mainPr.Enum.ChildCommonDtoMsgList.*;
 
 /**
@@ -35,7 +35,7 @@ public class RentHistoryService {
     public ChildCommonDto getRentHistory(Integer memberId) {
 
         try {
-            List<RentHistory> rentHistoryList = rentHistoryRepository.findAllByOwnerId(memberId);
+            List<RentHistory> rentHistoryList = rentHistoryRepository.findAllByTargetMemberId(memberId);
 
             if (rentHistoryList.size() != 0) {
                 List<RentHistoryResponseDto> responses = rentHistoryMapper.map(rentHistoryList);
@@ -78,6 +78,39 @@ public class RentHistoryService {
             }
 
             return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e) {
+
+            return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    public ChildCommonDto updateRentHistoryData(UpdateRentHistoryDto dto) {
+        try {
+
+            if(dto.getRentHistoryId()==null &&dto.getRentStartDate()==null &&dto.getRentEndDate()==null &&dto.getMsg()==null)
+            {
+                return new ChildCommonDto(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
+            }
+
+            RentHistory rentHistory = rentHistoryRepository.findById(dto.getRentHistoryId()).orElseThrow();
+
+            if(dto.getRentHistoryId()!=null)
+                rentHistory.setRentStatus(dto.getRentStatus());
+            if(dto.getRentStartDate()!=null)
+                rentHistory.setRentStartDate(dto.getRentStartDate());
+            if(dto.getRentEndDate()!=null)
+                rentHistory.setRentEndDate(dto.getRentEndDate());
+            if(dto.getMsg()!=null)
+                rentHistory.setMsg(dto.getMsg());
+            rentHistory.setUpdateTime(defaultTimeZone.getNow());
+
+            RentHistory created = rentHistoryRepository.save(rentHistory);
+
+            if (created != null) {
+                return new ChildCommonDto(SUC.getMsg(), HttpStatus.OK, rentHistoryMapper.responseMap(created));
+            }
+
+            return new ChildCommonDto(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);
         } catch (Exception e) {
 
             return new ChildCommonDto(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);

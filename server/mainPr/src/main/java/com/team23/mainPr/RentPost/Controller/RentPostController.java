@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/RentPost")
+@RequestMapping("/rentPost")
 @RequiredArgsConstructor
 public class RentPostController {
 
@@ -26,7 +26,7 @@ public class RentPostController {
      */
 
     @Operation
-    @PostMapping("/register")
+    @PostMapping("/post")
     public ResponseEntity<ChildCommonDto> createRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 렌트 게시글 데이터.", required = true) CreateRentPostDto dto) {
         ChildCommonDto response = RentPostService.createRentPost(dto);
 
