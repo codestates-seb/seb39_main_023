@@ -64,8 +64,6 @@ public class LoginService {
 
     public ChildCommonDto<ParentCommonDto> doLogout(String authorization) {
 
-        Login login = loginRepository.findByToken(authorization);
-
         if (login == null)
             return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
