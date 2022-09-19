@@ -1,8 +1,8 @@
 package com.team23.mainPr.Domain.RentPost.Controller;
 
-import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
-import com.team23.mainPr.Domain.RentPost.Dto.RentPostResponseDto;
-import com.team23.mainPr.Domain.RentPost.Dto.UpdateRentPostDto;
+import com.team23.mainPr.Domain.RentPost.Dto.Request.CreateRentPostEntityDto;
+import com.team23.mainPr.Domain.RentPost.Dto.Response.RentPostResponseDto;
+import com.team23.mainPr.Domain.RentPost.Dto.Request.UpdateRentPostDto;
 import com.team23.mainPr.Domain.RentPost.Service.RentPostService;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +27,7 @@ public class RentPostController {
 
     @Operation
     @PostMapping("/post")
-    public ResponseEntity<ChildCommonDto<RentPostResponseDto>> createRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 렌트 게시글 데이터.", required = true) CreateRentPostDto dto) {
+    public ResponseEntity<ChildCommonDto<RentPostResponseDto>> createRentPost(@RequestBody @Parameter(name = "CreateRentPostDto", description = "입력한 렌트 게시글 데이터.", required = true) CreateRentPostEntityDto dto) {
 
         ChildCommonDto<RentPostResponseDto> response = RentPostService.createRentPost(dto);
 

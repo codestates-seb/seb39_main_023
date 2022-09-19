@@ -1,8 +1,8 @@
 package com.team23.mainPr.Domain.RentPost.Service;
 
-import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
-import com.team23.mainPr.Domain.RentPost.Dto.RentPostResponseDto;
-import com.team23.mainPr.Domain.RentPost.Dto.UpdateRentPostDto;
+import com.team23.mainPr.Domain.RentPost.Dto.Request.CreateRentPostEntityDto;
+import com.team23.mainPr.Domain.RentPost.Dto.Request.UpdateRentPostDto;
+import com.team23.mainPr.Domain.RentPost.Dto.Response.RentPostResponseDto;
 import com.team23.mainPr.Domain.RentPost.Entity.RentPost;
 import com.team23.mainPr.Domain.RentPost.Mapper.RentPostMapper;
 import com.team23.mainPr.Domain.RentPost.Repository.RentPostRepository;
@@ -11,8 +11,8 @@ import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.*;
+import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.FALSE;
+import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.TRUE;
 
 /**
  * <pre>
@@ -30,93 +30,65 @@ public class RentPostService {
     private final RentPostMapper rentPostMapper;
     private final DefaultTimeZone defaultTimeZone;
 
-    public ChildCommonDto<RentPostResponseDto> createRentPost(CreateRentPostDto dto) {
+    public ChildCommonDto<RentPostResponseDto> createRentPost(CreateRentPostEntityDto dto) {
 
-        try {
-            RentPost post = rentPostMapper.createMap(dto);
-            post.setUpdateDate(defaultTimeZone.getNow());
-            post.setWriteDate(defaultTimeZone.getNow());
+        RentPost post = rentPostMapper.CreateRentPostEntityDtoToRentPost(dto);
+        post.setUpdateDate(defaultTimeZone.getNow());
+        post.setWriteDate(defaultTimeZone.getNow());
 
-            rentPostRepository.save(post);
+        RentPost result = rentPostRepository.save(post);
 
-            RentPost result = rentPostRepository.findById(post.getRentPostId()).orElse(null);
-
-            if (result != null) {
-                return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
-            } else
-                return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(result));
-
-        } catch (Exception e) {
-
-            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
+        if (result != null) {
+            return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
+        } else
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(result));
     }
 
     public ChildCommonDto<RentPostResponseDto> updateRentPost(Integer postId, UpdateRentPostDto dto) {
 
-        try {
+        RentPost post = rentPostRepository.findById(postId).orElse(null);
 
-            RentPost post = rentPostRepository.findById(postId).orElseThrow();
+        if (dto.getRentPostContents() != null && dto.getRentPostName() != null && dto.getRentStatus().equals(post.getRentStatus()))
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(post));
 
-            if (dto.getRentPostContents() != null && dto.getRentPostName() != null && dto.getRentStatus().equals( post.getRentStatus()))
-                return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(post));
+        if (dto.getRentPostContents() != null)
+            post.setRentPostContents(dto.getRentPostContents());
+        if (dto.getRentPostName() != null)
+            post.setRentPostName(dto.getRentPostName());
+        if (dto.getRentStatus().equals(post.getRentStatus()))
+            post.setRentStatus(dto.getRentStatus());
 
-            if (dto.getRentPostContents() != null)
-                post.setRentPostContents(dto.getRentPostContents());
-            if (dto.getRentPostName() != null)
-                post.setRentPostName(dto.getRentPostName());
-            if (dto.getRentStatus().equals( post.getRentStatus()))
-                post.setRentStatus(dto.getRentStatus());
+        post.setUpdateDate(defaultTimeZone.getNow());
 
-            post.setUpdateDate(defaultTimeZone.getNow());
-            rentPostRepository.flush();
+        rentPostRepository.flush();
 
-            RentPost result = rentPostRepository.findById(postId).orElse(null);
+        if (rentPostRepository.findById(postId).orElse(null) != null) {
 
-            if (result != null && result.getRentPostContents().equals(dto.getRentPostContents())) {
-
-                return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
-            }
-
-
-            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(result));
-
-        } catch (Exception e) {
-
-            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(post));
         }
+
+        return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(post));
     }
 
     public ChildCommonDto<RentPostResponseDto> deleteRentPost(Integer postId) {
 
-        try {
-            RentPost post = rentPostRepository.findById(postId).orElseThrow();
-            rentPostRepository.delete(post);
+        RentPost post = rentPostRepository.findById(postId).orElse(null);
+        rentPostRepository.delete(post);
 
-            RentPost result = rentPostRepository.findById(post.getRentPostId()).orElse(null);
-            if (result == null)
-                return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
-            else
-                return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(result));
-
-        } catch (Exception e) {
-
-            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
+        RentPost result = rentPostRepository.findById(post.getRentPostId()).orElse(null);
+        if (result == null)
+            return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
+        else
+            return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, rentPostMapper.RentPostToRentPostResponse(result));
     }
 
     public ChildCommonDto<RentPostResponseDto> getRentPost(Integer postId) {
 
-        try {
-            RentPost result = rentPostRepository.findById(postId).orElseThrow();
+        RentPost result = rentPostRepository.findById(postId).orElse(null);
 
-            result.setViewCount(result.getViewCount() + 1);
-            rentPostRepository.flush();
+        result.setViewCount(result.getViewCount() + 1);
+        rentPostRepository.flush();
 
-            return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
-        } catch (Exception e) {
-
-            return new ChildCommonDto<>(ERROR.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
+        return new ChildCommonDto<>(TRUE.getMsg(), HttpStatus.OK, rentPostMapper.RentPostToRentPostResponse(result));
     }
 }

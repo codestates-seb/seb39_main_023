@@ -1,6 +1,6 @@
 package com.team23.mainPr.Domain.RentPost.Entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,11 @@ import java.time.ZonedDateTime;
  */
 
 @Entity
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class RentPost {
 
     Boolean rented = false;

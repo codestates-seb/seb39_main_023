@@ -9,11 +9,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface RentHistoryMapper {
-    List<RentHistoryResponseDto> map(List<RentHistory> rentHistoryList);
+    List<RentHistoryResponseDto> RentHistorysToRentHistoryResponseDtos(List<RentHistory> rentHistorys);
 
-    RentHistory CreateMap(CreateRentHistoryEntityDto dto);
+    RentHistory CreateRentHistoryEntityDtoToRentHistory(CreateRentHistoryEntityDto dto);
 
-    RentHistoryResponseDto responseMap(RentHistory created);
+    RentHistoryResponseDto RentHistoryToRentHistoryResponseDto(RentHistory created);
 
     RentHistory RentHistoryToRelatedRentHistory(RentHistory created);
 

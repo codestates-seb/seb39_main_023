@@ -77,7 +77,7 @@ public class LoginService {
         login.setLogoutDate(defaultTimeZone.getNow());
         loginRepository.flush();
 
-        return new ChildCommonDto<>(SUC.getMsg(), HttpStatus.OK, null);
+        return new ChildCommonDto<>(SUCCESS.getMsg(), HttpStatus.OK, null);
     }
 
     public ChildCommonDto<ParentCommonDto> refreshToken(String token) {

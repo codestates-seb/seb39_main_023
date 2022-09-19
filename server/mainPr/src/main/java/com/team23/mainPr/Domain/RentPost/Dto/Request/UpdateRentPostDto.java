@@ -1,4 +1,4 @@
-package com.team23.mainPr.Domain.RentPost.Dto;
+package com.team23.mainPr.Domain.RentPost.Dto.Request;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;

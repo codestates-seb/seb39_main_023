@@ -1,7 +1,7 @@
 package com.team23.mainPr.Domain.RentPost.Mapper;
 
-import com.team23.mainPr.Domain.RentPost.Dto.CreateRentPostDto;
-import com.team23.mainPr.Domain.RentPost.Dto.RentPostResponseDto;
+import com.team23.mainPr.Domain.RentPost.Dto.Request.CreateRentPostEntityDto;
+import com.team23.mainPr.Domain.RentPost.Dto.Response.RentPostResponseDto;
 import com.team23.mainPr.Domain.RentPost.Entity.RentPost;
 import org.mapstruct.Mapper;
 
@@ -9,5 +9,5 @@ import org.mapstruct.Mapper;
 public interface RentPostMapper {
     RentPostResponseDto RentPostToRentPostResponse(RentPost rentPost);
 
-    RentPost createMap(CreateRentPostDto dto);
+    RentPost CreateRentPostEntityDtoToRentPost(CreateRentPostEntityDto dto);
 }
