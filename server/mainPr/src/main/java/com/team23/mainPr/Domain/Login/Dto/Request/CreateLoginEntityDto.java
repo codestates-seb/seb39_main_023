@@ -1,10 +1,15 @@
-package com.team23.mainPr.Domain.Login.Dto;
+package com.team23.mainPr.Domain.Login.Dto.Request;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 import java.time.ZonedDateTime;
 
-@Data
-public class CreateLoginDto {
+@Getter
+@Setter
+@RequiredArgsConstructor
+public class CreateLoginEntityDto {
 
     private String loginId;
     private String password;

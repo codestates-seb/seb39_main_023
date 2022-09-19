@@ -1,6 +1,9 @@
 package com.team23.mainPr.Domain.Login.Entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +11,9 @@ import javax.persistence.Id;
 import java.time.ZonedDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class Login {
 
     @Id
@@ -16,8 +21,8 @@ public class Login {
     Integer loginId;
     Integer memberId;
     String token;
-    ZonedDateTime lastLoginDt;
-    ZonedDateTime logoutDt;
+    ZonedDateTime lastLoginDate;
+    ZonedDateTime logoutDate;
     Boolean logouted;
 
 }
