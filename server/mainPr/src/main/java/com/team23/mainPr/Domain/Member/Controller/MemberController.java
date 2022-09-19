@@ -1,6 +1,12 @@
 package com.team23.mainPr.Domain.Member.Controller;
 
-import com.team23.mainPr.Domain.Member.Dto.*;
+
+import com.team23.mainPr.Domain.Member.Dto.Request.CreateMemberDto;
+import com.team23.mainPr.Domain.Member.Dto.Request.FindIdDto;
+import com.team23.mainPr.Domain.Member.Dto.Request.FindPasswordDto;
+import com.team23.mainPr.Domain.Member.Dto.Request.UpdateMemberDto;
+import com.team23.mainPr.Domain.Member.Dto.Response.MemberProfileDto;
+import com.team23.mainPr.Domain.Member.Dto.Response.MemberResponseDto;
 import com.team23.mainPr.Domain.Member.Service.MemberService;
 import com.team23.mainPr.Global.Dto.ChildCommonDto;
 import io.swagger.v3.oas.annotations.Operation;

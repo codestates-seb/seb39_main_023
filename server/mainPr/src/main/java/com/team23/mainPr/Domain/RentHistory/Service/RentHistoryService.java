@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
 import static com.team23.mainPr.Global.Enum.ChildCommonDtoMsgList.*;
 
 /**
@@ -40,6 +39,7 @@ public class RentHistoryService {
         if (rentHistorys.size() != 0) {
             List<RentHistoryResponseDto> responses = rentHistoryMapper.RentHistorysToRentHistoryResponseDtos(rentHistorys);
             return new ChildCommonDto<>(SUCCESS.getMsg(), HttpStatus.OK, new RentHistoryResponseDtos(responses));
+
         }
 
         return new ChildCommonDto<>(FAIL.getMsg(), HttpStatus.BAD_REQUEST, null);
@@ -64,6 +64,7 @@ public class RentHistoryService {
             return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);
 
         RentHistory rentHistory = rentHistoryMapper.CreateRentHistoryEntityDtoToRentHistory(dto);
+
         rentHistory.setCreatedTime(defaultTimeZone.getNow());
         rentHistory.setUpdateTime(defaultTimeZone.getNow());
 
@@ -77,6 +78,7 @@ public class RentHistoryService {
         rentHistoryRepository.flush();
 
         return new ChildCommonDto<>(SUCCESS.getMsg(), HttpStatus.OK, rentHistoryMapper.RentHistoryToRentHistoryResponseDto(created));
+
     }
 
     public ChildCommonDto<RentHistoryResponseDto> deleteRentHistory(Integer rentHistoryId) {
@@ -89,7 +91,7 @@ public class RentHistoryService {
             rentHistoryRepository.delete(rentHistory);
             rentHistoryRepository.deleteById(relatedRentHistoryId);
 
-            new ChildCommonDto<>(SUCCESS.getMsg(), HttpStatus.OK, null);
+            return new ChildCommonDto<>(SUCCESS.getMsg(), HttpStatus.OK, null);
         }
 
         return new ChildCommonDto<>(FALSE.getMsg(), HttpStatus.BAD_REQUEST, null);

@@ -1,4 +1,4 @@
-package com.team23.mainPr.Domain.Member.Dto;
+package com.team23.mainPr.Domain.Member.Dto.Response;
 
 import com.team23.mainPr.Global.Dto.ParentCommonDto;
 import lombok.Data;
