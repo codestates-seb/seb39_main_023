@@ -1,6 +1,4 @@
-package com.team23.mainPr.Domain.Login.Dto;
-
-import lombok.Data;
+package com.team23.mainPr.Domain.Login.Dto.Request;
 
 @Data
 public class DoLoginDto {
