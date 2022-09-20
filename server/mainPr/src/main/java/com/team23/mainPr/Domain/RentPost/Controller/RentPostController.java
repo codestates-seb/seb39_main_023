@@ -66,7 +66,7 @@ public class RentPostController {
     public List<Integer> getImages(@RequestParam Integer postId) {
         return RentPostService.getPostImages(postId);
     }
-
+    
     @GetMapping(value = "/image/get", produces = "image/png")
     public Resource getImage(@RequestParam Integer imageId) throws IOException {
         return RentPostService.getImage(imageId);
