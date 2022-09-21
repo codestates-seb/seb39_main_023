@@ -93,8 +93,5 @@ public class RentPostController {
         return rentPostService.searchAll(phrase);
     }
 
-    @PostMapping("/ftSearch")
-    public List<RentPostResponseDto> ftSearch(@RequestParam  String phrase){
-        return rentPostService.ftSearchAll(phrase);
-    }
+
 }
