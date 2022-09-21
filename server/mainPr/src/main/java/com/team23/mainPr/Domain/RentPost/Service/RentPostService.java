@@ -134,4 +134,13 @@ public class RentPostService {
         return response;
     }
 
+    public List<RentPostResponseDto> searchAll(String phrase) {
+        List<RentPostResponseDto> result = new ArrayList<>();
+        rentPostRepository.search("" + phrase.replace(" ", "|").trim() + "")
+                .stream().forEach(
+                        rentPostId ->{
+                            result.add(rentPostMapper.RentPostToRentPostResponseDto(rentPostRepository.getReferenceById((Integer) rentPostId)));
+                        });
+        return result;
+    }
 }

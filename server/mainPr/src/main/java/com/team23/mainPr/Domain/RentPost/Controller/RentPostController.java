@@ -87,5 +87,9 @@ public class RentPostController {
                                                   @RequestParam(defaultValue = "category")  String category){
         return rentPostService.getRentPosts(pageable, rentStatus, category);
     }
-    
+
+    @PostMapping("/search")
+    public List<RentPostResponseDto> getRentPosts(@RequestParam  String phrase){
+        return rentPostService.searchAll(phrase);
+    }
 }

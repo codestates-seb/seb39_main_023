@@ -19,4 +19,9 @@ public interface RentPostRepository extends JpaRepository<RentPost, Integer> {
 
     Page<RentPost> findAllByRentStatusAndCategoryContaining(Pageable pageable, Boolean rentStatus, String category);
 
+    @Query(value = "SELECT p.RENT_POST_ID\n" +
+            "FROM RENT_POST as p\n" +
+            "WHERE p.rent_post_name REGEXP ?1 ;", nativeQuery = true)
+//native query only use order parameter
+    List<Object> search(String phrase);
 }
