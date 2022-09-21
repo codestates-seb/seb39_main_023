@@ -144,5 +144,13 @@ public class RentPostService {
         return result;
     }
 
-   
+    public List<RentPostResponseDto> ftSearchAll(String phrase) {
+        List<RentPostResponseDto> result = new ArrayList<>();
+        rentPostRepository.ftSearch(""+phrase+"")
+                .stream().forEach(
+                        rentPost ->{
+                            result.add(rentPostMapper.RentPostToRentPostResponseDto((RentPost) rentPost));
+                        });
+        return result;
+    }
 }
