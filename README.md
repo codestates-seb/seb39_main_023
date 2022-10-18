@@ -20,8 +20,62 @@
 ![Group 1430](https://user-images.githubusercontent.com/102936206/194766255-d5f54377-73a3-4169-a36b-dadc338559c0.svg)|![Group 1427](https://user-images.githubusercontent.com/102936206/194766266-d0ac646d-7d74-41aa-9d62-91d38efacfa4.svg)|![Group 1425](https://user-images.githubusercontent.com/102936206/194766274-28f592a8-a3ee-423e-9273-991f28db8c52.svg)
 <a href="https://github.com/wonyong92">@wonyong92</a>|<a href="https://github.com/davidnam0514">@davidnam0514</a>|<a href="https://github.com/Moondoyeon">@Moondoyeon</a>
 
+
 ## 🌈 기술 스택
 ![Group 1459 (4)](https://user-images.githubusercontent.com/102936206/196418858-89960720-49db-4a94-9e55-2d8da8537762.svg)
+
+
+## 🎬 데모 영상(토글을 눌러주세요)
+<details>
+<summary>회원가입 & 로그인</summary>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/102936206/196429889-e87f7c82-a175-41c0-90c3-14141e0cef62.gif">
+</div>
+</details>
+
+<details>
+<summary>로그인 & 메인페이지 필터기능</summary>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/102936206/196430820-f3715470-9260-49c0-8e47-3d2ddbd99168.gif">
+</div>
+</details>
+
+<details>
+<summary>게시글 작성 & 작성글 확인</summary>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/102936206/196430949-9cd409a7-2646-464d-acbe-e7e8f296f570.gif">
+</div>
+</details>
+
+<details>
+<summary>렌트신청 댓글작성</summary>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/102936206/196431253-7536d23d-132b-4096-93a9-12e27b10d46e.gif">
+</div>
+</details>
+
+<details>
+<summary>카테고리 검색</summary>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/102936206/196431319-3b2c0fef-0290-4704-bfdd-dd72db39b887.gif">
+</div>
+</details>
+
+<details>
+<summary>키워드(글제목) 검색</summary>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/102936206/196431591-c786b9f0-3b0f-4b86-935d-eb44024cff76.gif">
+</div>
+</details>
+
+<details>
+<summary>반응형 웹</summary>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/102936206/196432564-70595763-e944-4ce8-99a9-a2af41b71d91.gif">
+</div>
+</details>
+
+
 
 
 ## 💙 프로젝트 아키텍쳐
