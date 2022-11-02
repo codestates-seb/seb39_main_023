@@ -1,33 +1,50 @@
 import styled from 'styled-components';
 import { ReactComponent as Git } from '../../asessts/img/github.svg';
 const MyFooter = styled.footer`
+  padding-top: 5px;
   font-size: 12px;
-  text-align: center;
-  color: #464646;
+  color: black;
+  background-color: white;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
   border-top: 1px solid #f1efef;
   box-shadow: rgba(100, 100, 100, 0.1) 0px -2px 6px;
-  width: 100%;
-  padding: 15px;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    width: 80%;
+    div {
+      display: none;
+    }
+  }
 `;
 const Wrapper = styled.footer`
   display: flex;
   align-items: center;
-  justify-content: center;
-  div {
-    margin: 3px;
+  span {
+    margin-left: 2px;
   }
   a {
-    margin: 3px;
+    margin-right: 3px;
+    color: black;
     text-decoration: none;
-    color: #464646;
+  }
+  a:hover {
+    color: #686767;
+  }
+  @media screen and (max-width: 500px) {
+    span {
+      display: none;
+    }
   }
 `;
 const GitIconSVG = styled(Git)`
-  width: 20px;
+  width: 15px;
+  margin-right: 3px;
 `;
 
 const Footer = () => {
@@ -40,9 +57,9 @@ const Footer = () => {
         <a href={gitUrl}>Team 023 Github repository</a>
       </Wrapper>
       <Wrapper>
-        <div>BE 장원용</div>
-        <div>FE 남충현</div>
-        <div>FE 문도연</div>
+        <span>BE 장원용</span>
+        <span>FE 남충현</span>
+        <span>FE 문도연</span>
       </Wrapper>
     </MyFooter>
   );
