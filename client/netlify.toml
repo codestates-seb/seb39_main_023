@@ -1,5 +1,5 @@
 [[redirects]]
 from = "/proxy/*"
-  to = "https://team23back.mooo.com:8080/:splat"
+  to = "https://villagemo.netlify.app/:splat"
   status = 200
   force = true

@@ -1,4 +1,4 @@
-const PROXY = window.location.hostname === 'localhost' ? '' : '%PUBLIC_URL%';
+const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
