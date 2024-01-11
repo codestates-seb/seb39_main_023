@@ -1,4 +1,4 @@
-const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
+const PROXY = window.location.hostname === 'localhost' ? '' : '%PUBLIC_URL%';
 import styled from 'styled-components';
 import Button from '../../UI/button/Button';
 import TextButton from '../../UI/button/TextButton';
