@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as Logo } from '../../asessts/img/logo.svg';
 export const MyHeader = styled.header`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   position: sticky;
@@ -10,7 +10,7 @@ export const MyHeader = styled.header`
   opacity: 0.95;
   /* backdrop-filter: blur(30px); */
   border-bottom: 0.5px solid #f5f5f5;
-  box-shadow: rgba(100, 100, 100, 0.1) 0px 2px 5px;
+  box-shadow: rgba(100, 100, 100, 0.1) 0px -100px 5px;
   margin-top: 5px;
   margin-bottom: 10px;
   @media screen and (max-width: 500px) {

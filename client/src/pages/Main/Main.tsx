@@ -3,7 +3,204 @@ import styled from 'styled-components';
 import PostItem, { PostItemData } from '../../components/PostItem/PostItem';
 import { useEffect, useState } from 'react';
 import useScroll from '../../hooks/useScroll';
+export interface IPostItem {
+  category: string;
+  image: any;
+  location: string | undefined;
+  rentPostContents: string | undefined;
+  rentPostId: number | undefined;
+  rentPostName: string | undefined;
+  rentPostImages: string;
+  rentPrice: number | undefined;
+  rentStatus: boolean | undefined;
+  updateDate: string | undefined;
+  viewCount: number | undefined;
+  writeDate: string | undefined;
+  writerId: number | undefined;
+}
 const Main = () => {
+  const fakePostList: IPostItem[] = [
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+    {
+      category: '책',
+      image: '',
+      location: '대전',
+      rentPostContents: '100 회독해서 다 외워버렸네요 ^^ 싸게 빌려드립니다~',
+      rentPostId: 0,
+      rentPostName: '모던 딥다이브 자바스크립트',
+      rentPostImages: '',
+      rentPrice: 3000,
+      rentStatus: false,
+      updateDate: '2024년 1월 11일',
+      viewCount: 9,
+      writeDate: '2024년 1월 11일',
+      writerId: 0,
+    },
+  ];
   const [posts, setPosts] = useState<PostItemData[]>([]);
   const [sortType, setSortType] = useState('writeDate');
   useScroll();
@@ -56,7 +253,7 @@ const Main = () => {
       <HeadRow>
         <h2>오늘은 뭐 빌리지?</h2>
       </HeadRow>
-      <ItemContainer>{posts && posts.map((el, idx) => <PostItem data={el} key={idx} />)}</ItemContainer>
+      <ItemContainer>{<PostItem postList={fakePostList} />}</ItemContainer>
     </>
   );
 };

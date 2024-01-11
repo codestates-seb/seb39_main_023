@@ -50,7 +50,7 @@ const CommentWrite = ({ postId, setRenewCommentsList, renewComments }: CommentWr
       sendComment(comment);
       setComment({ ...comment, commentContents: '' });
     } else {
-      return;
+      goLoginPage();
     }
   };
   const goLoginPage = () => {
@@ -67,7 +67,7 @@ const CommentWrite = ({ postId, setRenewCommentsList, renewComments }: CommentWr
           onChange={onChangeComment}
           value={comment.commentContents}
           name={'commentContents'}
-          onClick={user.memberId ? undefined : goLoginPage}
+          // onClick={user.memberId ? undefined : goLoginPage}
         />
         <Button text="작성" width="short" onClick={clickHandler} />
       </CommentWrapper>

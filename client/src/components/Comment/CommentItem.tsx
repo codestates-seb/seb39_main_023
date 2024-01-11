@@ -75,10 +75,10 @@ const CommentItem = ({ data, setRenewCommentsList, renewComments }: CommentDataP
   return (
     <>
       <CommentItemWrapper>
-        <Image alt="practice" src={imgUrl} />
-        <div>{nickname}</div>
+        <Image alt="practice" src={`${PROXY}/user2.png`} />
+        <div>FE준비생</div>
         <CommentItemHeader>
-          <span>{processedDate}</span>
+          <span>{data.writeDate}</span>
         </CommentItemHeader>
         <CommentItemContent>{data.commentContents}</CommentItemContent>
         {user.memberId === data.writerId ? (

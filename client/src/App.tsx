@@ -67,7 +67,7 @@ const App = () => {
           <Routes>
             {user.loginId ? <Route path="/" element={<PostList />} /> : <Route path="/" element={<Main />} />}
             <Route path="/postedit/:id" element={<PostEdit />} />
-            <Route path="/postdetail/:id" element={<PostDetail />} />
+            <Route path="/postdetail/1" element={<PostDetail />} />
             <Route path="/postwrite" element={<PostWrite />} />
             <Route path="/search/category" element={<SearchCategory />} />
             <Route path="/search/keyword" element={<SearchKeyword />} />

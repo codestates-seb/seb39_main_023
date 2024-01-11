@@ -108,6 +108,12 @@ export const FirstRow = styled.div`
   word-wrap: break-word;
   line-height: 1.2em;
   height: 3.6em;
+  .location {
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 4px;
+    color: gray;
+  }
   @media screen and (max-width: 500px) {
     font-size: 15px;
     min-height: 20px;

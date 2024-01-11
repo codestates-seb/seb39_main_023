@@ -6,7 +6,6 @@ import { useContext } from 'react';
 import { SearchResultContext, UserContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import { searchCategoryKeyword } from '../../Utils';
-import userEvent from '@testing-library/user-event';
 
 interface Props {
   menuModal?: boolean;

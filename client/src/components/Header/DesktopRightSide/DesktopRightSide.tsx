@@ -27,7 +27,8 @@ const DesktopRightSide = ({ setUserModal, memberId }: PropsType) => {
       <Button
         text={'글쓰기 +'}
         width={'short'}
-        onClick={memberId ? () => navigate('/postwrite') : () => navigate('/login')}
+        onClick={() => navigate('/postwrite')}
+        // onClick={memberId ? () => navigate('/postwrite') : () => navigate('/login')}
       />
     </DesktopTopRight>
   );

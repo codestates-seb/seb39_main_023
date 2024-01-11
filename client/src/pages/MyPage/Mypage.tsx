@@ -12,11 +12,11 @@ const Mypage = () => {
         <div className="title">내 계정</div>
         <Btns>
           <BtnWrapper onClick={() => setIsInfo(true)} className={isInfo ? 'active' : 'deActive'}>
-            <FontAwesomeIcon icon={faUser} className="icon" />
+            {/* <FontAwesomeIcon icon={faUser} className="icon" /> */}
             <button>회원정보</button>
           </BtnWrapper>
           <BtnWrapper onClick={() => setIsInfo(false)} className={isInfo ? 'deActive' : 'active'}>
-            <FontAwesomeIcon icon={faEdit} className="icon" />
+            {/* <FontAwesomeIcon icon={faEdit} className="icon" /> */}
             <button>계정</button>
           </BtnWrapper>
         </Btns>

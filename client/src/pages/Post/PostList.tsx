@@ -41,8 +41,9 @@ const PostList = () => {
         <SearchFilter value={sortType} onChange={handleSortChange} optionList={sortOptionList} />
       </Top>
       <ItemContainer>
-        {posts.map((el: any) => (
-          <PostItem data={el} key={el.rentPostId} />
+        {posts.map((el, idx) => (
+          <div key={idx}></div>
+          // <PostItem data={el} key={el.rentPostId} />
         ))}
       </ItemContainer>
       <div ref={ref} />

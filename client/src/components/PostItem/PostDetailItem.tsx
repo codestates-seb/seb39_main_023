@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { config } from '../../config/config';
 import axios from 'axios';
+import { IPostItem } from '../../pages/Main/Main';
 export interface PostItemDetailData {
   category: string;
   rentPostImages: number[];
@@ -48,7 +49,7 @@ interface IPostItemDetailProps {
   };
 }
 
-const PostDetailItem = ({ data }: IPostItemDetailProps) => {
+const PostDetailItem = ({ data }: { data: IPostItem }) => {
   // const imgUrl: string = `${config.apiUrl}rentPost/image/get?imageId=${data.rentPostImages[0]}`;
   const [count, setCount] = useState(1);
   const [imageURL, setImageURL] = useState('');
@@ -99,13 +100,14 @@ const PostDetailItem = ({ data }: IPostItemDetailProps) => {
       setImageURL(`${config.apiUrl}rentPost/image/get?imageId=${data.rentPostImages[count]}`);
     }
   };
+
   return (
     <>
       <ListWrapper>
         <ImgWrapper>
           {/* <FontAwesomeIcon icon={faAngleLeft} onClick={getPrevImage} className="icon" /> */}
           {/* <FontAwesomeIcon icon={faAngleRight} onClick={getNextImage} className="icon" /> */}
-          <GoodsImage src={imageURL} />
+          <GoodsImage src={`${PROXY}/book-modern-js.png`} />
           {/* <GoodsImage src={imgUrl} /> */}
         </ImgWrapper>
         <DescriptionWrapper>
@@ -116,7 +118,7 @@ const PostDetailItem = ({ data }: IPostItemDetailProps) => {
               <span>{category}</span>
             </PostInfo>
             <PostInfo>
-              <span>{processedDate}</span>
+              <span>{data.writeDate}</span>
               <span>조회 {data.viewCount}</span>
             </PostInfo>
           </InfoWrapper>
@@ -125,7 +127,8 @@ const PostDetailItem = ({ data }: IPostItemDetailProps) => {
             <Button text={data.rentStatus === false ? '렌트가능' : '렌트중'} radius="deep" width="short" />
             <WriterInfo>
               <ImgWrapper>
-                <img src={writerImageUrl} className="writerImage" />
+                <img src={`${PROXY}/user.png`} className="writerImage" />
+                <span></span>
               </ImgWrapper>
               <div className="nickname">{nickname}</div>
             </WriterInfo>
@@ -149,7 +152,7 @@ const PostDetailItem = ({ data }: IPostItemDetailProps) => {
           </ContentWrapper>
         </DescriptionWrapper>
       </ListWrapper>
-      {deleteModal ? <DeleteModal setDeleteModal={setDeleteModal} data={data} /> : null}
+      {/* {deleteModal ? <DeleteModal setDeleteModal={setDeleteModal} data={data} /> : null} */}
     </>
   );
 };
@@ -234,7 +237,7 @@ const ListWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 1000px;
-  height: 100%;
+  min-height: 400px;
   margin: 0;
   padding: 0;
   object-fit: cover;
@@ -252,6 +255,7 @@ const ListWrapper = styled.div`
 const DescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
 `;
 

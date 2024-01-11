@@ -33,20 +33,23 @@ const Header = () => {
           <FontAwesomeIcon
             className="icon"
             icon={faCirclePlus}
-            onClick={user.memberId ? () => navigate('/postwrite') : () => navigate('/login')}
+            onClick={() => navigate('/postwrite')}
+            // onClick={user.memberId ? () => navigate('/postwrite') : () => navigate('/login')}
           />
           <FontAwesomeIcon icon={faBars} onClick={() => setMenuModal(true)} className="icon" />
           <FontAwesomeIcon
             className="icon"
             icon={faUser}
-            onClick={user.memberId ? () => setUserModal(true) : () => navigate('/login')}
+            onClick={() => setUserModal(true)}
+            // onClick={user.memberId ? () => setUserModal(true) : () => navigate('/login')}
           />
         </Icons>
       </Top>
       <SearchBar keyword={keyword} setKeyword={setKeyword} />
       <DesktopRightSide setUserModal={setUserModal} memberId={user.memberId} />
       {menuModal ? <MenuModal menuModal={menuModal} setMenuModal={setMenuModal} /> : null}
-      {user.memberId && userModal ? <UserModal userModal={userModal} setUserModal={setUserModal} /> : null}
+      {userModal ? <UserModal userModal={userModal} setUserModal={setUserModal} /> : null}
+      {/* {user.memberId && userModal ? <UserModal userModal={userModal} setUserModal={setUserModal} /> : null} */}
     </MyHeader>
   );
 };

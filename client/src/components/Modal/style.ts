@@ -14,6 +14,7 @@ export const ModalBackDrop = styled.div`
 `;
 export const Container = styled.div<{ modalOpen: boolean }>`
   display: flex;
+  z-index: 99;
   flex-direction: column;
   position: relative;
   top: 52px;
@@ -21,7 +22,7 @@ export const Container = styled.div<{ modalOpen: boolean }>`
   padding: 7px;
   height: 40px;
   opacity: 1;
-  background-color: white;
+  /* background-color: white; */
 
   @media screen and (max-width: 500px) {
     align-items: center;
